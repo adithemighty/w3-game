@@ -7,8 +7,6 @@ window.onload = function() {
   function startGame() {
     intervalId = setInterval(updateCanvas, 1);
     gameStart = Date.now();
-    // Math.floor(millis/1000)
-    // console.log(gameStart)
   }
 };
 
@@ -20,20 +18,21 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var bR1 = new Background(10, 0, canvas.width, canvas.height - 50);
 var bR2 = new Background(bR1.x - bR1.width, 0, bR1.width, bR1.height);
+var enemy = new Enemy(100);
 var mario = new Hero(100, 100);
 var world = new World();
-var enemy = new Enemy(100);
 var intervalId;
 var gameStart,
   timePassed = 0;
 var playerHorizontalMovementFactor = 0;
 var score = 0;
+var collisionDetected = false;
 
-//update canvas is the main loop of the game
+//GAMES MAIN LOOP
 function updateCanvas() {
   bR1.newPos();
   bR2.newPos();
-  mario.newPos();
+  mario.newPos(enemy);
   enemy.newPos();
   drawBackground();
   drawHero();
@@ -53,17 +52,17 @@ document.onkeydown = function(e) {
     //RIGHT
     mario.newPos();
     playerHorizontalMovementFactor = 1;
-    // console.log('i moved right')
   } else if (e.keyCode === 38) {
     //UP
     mario.jump();
     mario.newPos();
   } else if (e.keyCode === 37) {
-    // console.log(e)
+    //LEFT
     playerHorizontalMovementFactor = -1;
   }
 };
 
+//Whenever a player presses nothing there should be no movement of the background
 document.onkeyup = function(e) {
   if (mario.y >= world.ground) {
     playerHorizontalMovementFactor = 0;
@@ -80,5 +79,3 @@ function showScore() {
   var text = `Your score: ${score}`;
   ctx.fillText(text, canvas.width - 250, 50);
 }
-
-// intervalId = setInterval(updateCanvas, 10);

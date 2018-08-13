@@ -9,8 +9,13 @@ var Enemy = function(width) {
 };
 
 function drawEnemy() {
-  ctx.save();
-  ctx.fillStyle = "red";
-  ctx.fillRect(enemy.enemX, enemy.enemY, enemy.width, enemy.width);
-  ctx.restore();
+  if (collisionDetected === false) {
+    ctx.save();
+    ctx.fillStyle = "red";
+    ctx.fillRect(enemy.enemX, enemy.enemY, enemy.width, enemy.width);
+    ctx.restore();
+  } else {
+    collisionDetected = false
+    // score++;
+  }
 }
