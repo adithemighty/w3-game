@@ -14,29 +14,30 @@ var World = function() {
   this.gravity = 1.007;
   this.ground = canvas.height / 2;
 };
+
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
-var bR1 = new Background(10, 0, canvas.width, canvas.height - 50);
-var bR2 = new Background(bR1.x - bR1.width, 0, bR1.width, bR1.height);
+var backgrImg1 = new Background(10, 0, canvas.width, canvas.height - 50);
+var backgrImg2 = new Background(backgrImg1.x - backgrImg1.width, 0, backgrImg1.width, backgrImg1.height);
 var enemy = new Enemy(100);
 var mario = new Hero(100, 100);
 var world = new World();
 var intervalId;
 var gameStart,
-  timePassed = 0;
+    timePassed = 0;
 var playerHorizontalMovementFactor = 0;
 var score = 0;
 var collisionDetected = false;
 
 //GAMES MAIN LOOP
 function updateCanvas() {
-  bR1.newPos();
-  bR2.newPos();
+  backgrImg1.newPos();
+  backgrImg2.newPos();
   mario.newPos(enemy);
   enemy.newPos();
-  drawBackground();
-  drawHero();
-  drawEnemy();
+  backgrImg1.drawBackground(backgrImg1, backgrImg2);
+  mario.drawHero();
+  enemy.drawEnemy();
   showScore();
 
   timePassed = Date.now() - gameStart;

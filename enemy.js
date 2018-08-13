@@ -6,16 +6,12 @@ var Enemy = function(width) {
   this.newPos = function() {
     this.enemX -= this.speed;
   };
-};
-
-function drawEnemy() {
-  if (collisionDetected === false) {
-    ctx.save();
-    ctx.fillStyle = "red";
-    ctx.fillRect(enemy.enemX, enemy.enemY, enemy.width, enemy.width);
-    ctx.restore();
-  } else {
-    collisionDetected = false
-    // score++;
+  this.drawEnemy = function(){
+    if (collisionDetected === false) {
+      ctx.save();
+      ctx.fillStyle = "red";
+      ctx.fillRect(this.enemX, this.enemY, this.width, this.width);
+      ctx.restore();
+    }
   }
-}
+};

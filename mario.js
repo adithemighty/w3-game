@@ -20,12 +20,11 @@ var Hero = function(x, y) {
       collisionDetected = true;
     }
   };
+  this.drawHero = function() {
+    var img = new Image();
+    img.src = mario.src;
+    ctx.save();
+    ctx.drawImage(img, mario.x, mario.y, mario.width, mario.height);
+    ctx.restore();
+  };
 };
-
-function drawHero() {
-  var img = new Image();
-  img.src = mario.src;
-  ctx.save();
-  ctx.drawImage(img, mario.x, mario.y, mario.width, mario.height);
-  ctx.restore();
-}

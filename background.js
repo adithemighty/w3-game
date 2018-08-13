@@ -16,14 +16,13 @@ var Background = function(x, y, width, height) {
       this.x -= 1 * playerHorizontalMovementFactor;
     }
   };
+  this.drawBackground = function(bG1, bG2) {
+    var img = new Image();
+    // img.onload = drawBackground;
+    img.src = this.src;
+    ctx.save();
+    ctx.drawImage(img, bG1.x, bG1.y, canvas.width, canvas.height);
+    ctx.drawImage(img, bG2.x, bG2.y, canvas.width, canvas.height);
+    ctx.restore();
+  };
 };
-
-function drawBackground() {
-  var img = new Image();
-  // img.onload = drawBackground;
-  img.src = bR1.src;
-  ctx.save();
-  ctx.drawImage(img, bR1.x, bR1.y, canvas.width, canvas.height);
-  ctx.drawImage(img, bR2.x, bR2.y, canvas.width, canvas.height);
-  ctx.restore();
-}
