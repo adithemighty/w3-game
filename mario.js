@@ -1,3 +1,9 @@
+var World = function() {
+  this.gravity = 1.007;
+  this.ground = canvas.height / 2;
+};
+
+var world = new World();
 var Hero = function(x, y) {
   this.x = x;
   this.y = y;
@@ -9,15 +15,20 @@ var Hero = function(x, y) {
       this.y -= 50;
     }
   };
-  this.newPos = function() {
+  this.newPos = function(enemy) {
     if (this.y >= world.ground) {
       this.y = world.ground;
     } else {
       this.y *= world.gravity;
     }
 
-    if (this.x + 50 - enemy.enemX > 0) {
+    if (enemy && this.x + 50 - enemy.posX > 0) {
       collisionDetected = true;
+      console.log('collision')
+      enemies.splice(0, 1)
+      score++
+    } else {
+      collisionDetected = false;
     }
   };
   this.drawHero = function() {
