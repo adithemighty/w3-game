@@ -10,7 +10,7 @@ window.onload = function() {
   }
 };
 
-var mario = new Hero(100, 100);
+var mario = new Hero(100, 200);
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var backgrImg1 = new Background(10, 0, canvas.width, canvas.height - 50);
@@ -61,7 +61,6 @@ function updateCanvas() {
 document.onkeydown = function(e) {
   if (e.keyCode === 39) {
     //RIGHT
-
     enemies.forEach(function(enemy) {
       mario.newPos(enemy);
     });
@@ -80,7 +79,9 @@ document.onkeydown = function(e) {
 
 //Whenever a player presses nothing there should be no movement of the background
 document.onkeyup = function(e) {
-  if (mario.y >= world.ground) {
+  if (e.keyCode === 39) {
+    playerHorizontalMovementFactor = 0;
+  } else if (e.keyCode === 37) {
     playerHorizontalMovementFactor = 0;
   }
 };

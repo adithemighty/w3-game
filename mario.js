@@ -1,6 +1,6 @@
 var World = function() {
   this.gravity = 1.007;
-  this.ground = canvas.height / 2;
+  this.ground = canvas.height - 110;
 };
 
 var world = new World();
@@ -24,7 +24,6 @@ var Hero = function(x, y) {
 
     if (enemy && this.x + 50 - enemy.posX > 0) {
       collisionDetected = true;
-      console.log('collision')
       enemies.splice(0, 1)
       score++
     } else {
