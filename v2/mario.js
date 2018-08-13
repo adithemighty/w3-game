@@ -3,7 +3,9 @@ var Hero = function(x, y) {
   this.y = y;
   this.src = "https://tinyurl.com/y9bhauff";
   this.jump = function() {
-    this.y -= 25;
+    if (this.y >= world.ground - 50) {
+      this.y -= 50;
+    }
   };
   this.newPos = function() {
     if (this.y >= world.ground) {
@@ -15,9 +17,9 @@ var Hero = function(x, y) {
 };
 
 function drawHero() {
-    var img = new Image();
-    img.src = mario.src;
-    cc.save();
-    cc.drawImage(img, mario.x, mario.y, 50, 70);
-    cc.restore();
-  }
+  var img = new Image();
+  img.src = mario.src;
+  ctx.save();
+  ctx.drawImage(img, mario.x, mario.y, 50, 70);
+  ctx.restore();
+}
