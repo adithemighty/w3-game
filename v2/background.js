@@ -9,8 +9,11 @@ var Background = function(x, y, width, height) {
         this.x = c.width;
       } else if (this.x > c.width) {
         this.x = 0 - c.width;
-      } else {
+        //hero moves right
+      } else if(playerHorizontalMovementFactor > 0){
         this.x -= 1 * playerHorizontalMovementFactor;
+      } else if(playerHorizontalMovementFactor < 0){
+        this.x -= 1 * playerHorizontalMovementFactor
       }
     };
   };

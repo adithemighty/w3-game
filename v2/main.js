@@ -1,27 +1,6 @@
 var c = document.getElementById("canvas");
 var cc = c.getContext("2d");
 
-// var Hero = function(x, y) {
-//   this.x = x;
-//   this.y = y;
-//   this.src = "https://tinyurl.com/y9bhauff";
-//   this.jump = function() {
-//     this.y -= 25;
-//   };
-//   this.newPos = function() {
-//     if (this.y >= world.ground) {
-//       this.y = world.ground;
-//     } else {
-//       this.y *= world.gravity;
-//     }
-//   };
-// };
-
-var Enemy = function(x, y) {
-  this.posX = x;
-  this.posY = y;
-};
-
 var World = function() {
   this.gravity = 1.01;
   this.ground = c.height / 2;
@@ -35,7 +14,6 @@ var intervalId;
 var counter = 0;
 var playerHorizontalMovementFactor = 0;
 
-intervalId = setInterval(updateCanvas, 10);
 
 function updateCanvas() {
   bR1.newPos();
@@ -60,3 +38,9 @@ document.onkeydown = function(e) {
     playerHorizontalMovementFactor = -1;
   }
 };
+
+document.onkeyup = function(e){
+  playerHorizontalMovementFactor=0
+}
+
+intervalId = setInterval(updateCanvas, 10);
