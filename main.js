@@ -26,8 +26,8 @@ var enemy = new Enemy(100);
 var intervalId;
 var gameStart,
   timePassed = 0;
-var timeCounter = 0;
 var playerHorizontalMovementFactor = 0;
+var score = 0;
 
 //update canvas is the main loop of the game
 function updateCanvas() {
@@ -38,12 +38,13 @@ function updateCanvas() {
   drawBackground();
   drawHero();
   drawEnemy();
+  showScore();
 
   timePassed = Date.now() - gameStart;
-  console.log("seconds elapsed = " + Math.floor(timePassed / 1000));
+
   if (Math.floor(timePassed / 1000) >= 30) {
     gameEnd();
-    clearInterval(intervalId)
+    clearInterval(intervalId);
   }
 }
 
@@ -71,6 +72,13 @@ document.onkeyup = function(e) {
 
 function gameEnd() {
   console.log("game ended");
+}
+
+function showScore() {
+  ctx.font = "30px monospace";
+  ctx.fillStyle = "white";
+  var text = `Your score: ${score}`;
+  ctx.fillText(text, canvas.width - 250, 50);
 }
 
 // intervalId = setInterval(updateCanvas, 10);
