@@ -5,39 +5,35 @@ var World = function() {
 
 var world = new World();
 var Hero = function(x, y) {
-  this.x = x;
-  this.y = y;
+  this.posX = x;
+  this.posY = y;
   this.src = "https://tinyurl.com/y9bhauff";
   this.width = 50;
   this.height = 70;
+
   this.jump = function() {
-    if (this.y >= world.ground - 50) {
-      this.y -= 50;
+    if (this.posY >= world.ground - 50) {
+      this.posY -= 50;
     }
   };
   this.newPos = function(enemy) {
-    if (this.y >= world.ground) {
-      this.y = world.ground;
+    if (this.posY >= world.ground) {
+      this.posY = world.ground;
     } else {
-      this.y *= world.gravity;
+      this.posY *= world.gravity;
     }
 
-    if (enemy && this.x + mario.width >= enemy.posX) {
-      console.log(this.y, enemy.posY + enemy.height);
-      if (this.y < enemy.posY + enemy.height) {
-        collisionDetected = true;
-        enemies.splice(0, 1);
-        score++;
-      }
-    } else {
-      collisionDetected = false;
+    if (enemy && this.posX + mario.width >= enemy.posX) {
+      enemy.collected = true;
+      enemies.splice(0, 1);
+      score++;
     }
   };
   this.drawHero = function() {
     var img = new Image();
     img.src = mario.src;
     ctx.save();
-    ctx.drawImage(img, mario.x, mario.y, mario.width, mario.height);
+    ctx.drawImage(img, mario.posX, mario.posY, mario.width, mario.height);
     ctx.restore();
   };
 };

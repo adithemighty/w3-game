@@ -5,7 +5,7 @@ window.onload = function() {
   };
 
   function startGame() {
-    generateEnemies(2);
+    generateEnemies(5);
     gameStart = Date.now();
   }
 };
@@ -27,15 +27,6 @@ var gameStart,
 var playerHorizontalMovementFactor = 0;
 var score = 0;
 var collisionDetected = false;
-
-function generateEnemies(enemNumb) {
-  var startingX = canvas.width - 150;
-  for (var i = 0; i < enemNumb; i++) {
-    var x = canvas.width - i;
-    enemies.push(new Enemy(startingX + 300 * i, 200, 100, 100));
-  }
-  intervalId = setInterval(updateCanvas, 1);
-}
 
 //GAMES MAIN LOOP
 function updateCanvas() {
