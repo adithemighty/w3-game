@@ -22,10 +22,13 @@ var Hero = function(x, y) {
       this.y *= world.gravity;
     }
 
-    if (enemy && this.x + 50 - enemy.posX > 0) {
-      collisionDetected = true;
-      enemies.splice(0, 1)
-      score++
+    if (enemy && this.x + mario.width >= enemy.posX) {
+      console.log(this.y, enemy.posY + enemy.height);
+      if (this.y < enemy.posY + enemy.height) {
+        collisionDetected = true;
+        enemies.splice(0, 1);
+        score++;
+      }
     } else {
       collisionDetected = false;
     }

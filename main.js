@@ -32,7 +32,7 @@ function generateEnemies(enemNumb) {
   var startingX = canvas.width - 150;
   for (var i = 0; i < enemNumb; i++) {
     var x = canvas.width - i;
-    enemies.push(new Enemy(startingX + 300 * i, 100, 100));
+    enemies.push(new Enemy(startingX + 300 * i, 200, 100, 100));
   }
   intervalId = setInterval(updateCanvas, 1);
 }
