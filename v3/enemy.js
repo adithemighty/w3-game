@@ -6,7 +6,7 @@ var Enemy = function(x, y, width, height) {
   this.height = height;
   this.collected = false;
   this.newPos = function() {
-    this.posX -= this.speed;
+    this.posX -= 1 * playerHorizontalMovementFactor;
   };
   this.drawEnemy = function() {
     if (this.collected === false) {
@@ -16,6 +16,7 @@ var Enemy = function(x, y, width, height) {
       ctx.restore();
     }
   };
+  
   this.top = function() {
     return this.posY;
   };
@@ -35,7 +36,7 @@ function generateEnemies(enemNumb) {
   var startingX = canvas.width - 150;
   for (var i = 0; i < enemNumb; i++) {
     randomNumber = generateRandomNumber(canvas.height);
-    enemies.push(new Enemy(startingX + 300 * i, randomNumber, 100, 100));
+    enemies.push(new Enemy(startingX + 300 * i, randomNumber, 25, 25));
   }
   intervalId = setInterval(updateCanvas, 1);
 }

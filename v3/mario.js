@@ -49,9 +49,10 @@ var Hero = function(x, y) {
     }
   };
   this.collectEnemy = function(enemy) {
+    console.log(enemies, collectedCats);
     enemy.collected = true;
+    collectedCats.push(enemy);
     enemies.splice(0, 1);
-    score++;
   };
   this.drawHero = function() {
     var img = new Image();

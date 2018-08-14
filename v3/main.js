@@ -10,7 +10,7 @@ window.onload = function() {
   }
 };
 
-var mario = new Hero(100, 200);
+var mario = new Hero(100, 140);
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var backgrImg1 = new Background(10, 0, canvas.width, canvas.height - 50);
@@ -20,13 +20,18 @@ var backgrImg2 = new Background(
   backgrImg1.width,
   backgrImg1.height
 );
-var enemies = [];
+var enemies = [],
+  collectedCats = [];
 var intervalId;
 var gameStart,
   timePassed = 0;
 var playerHorizontalMovementFactor = 0;
-var score = 0;
+var scores;
 var collisionDetected = false;
+
+function getNumberOfCollectedCats() {
+  return collectedCats.length;
+}
 
 //GAMES MAIN LOOP
 function updateCanvas() {
@@ -82,6 +87,7 @@ function gameEnd() {
 }
 
 function showScore() {
+  score = getNumberOfCollectedCats();
   ctx.font = "30px monospace";
   ctx.fillStyle = "white";
   var text = `Your score: ${score}`;
