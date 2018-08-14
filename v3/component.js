@@ -1,4 +1,4 @@
-var MovingComponent = function(x, y, width, height) {
+var Component = function(x, y, width, height) {
   this.posX = x;
   this.posY = y;
   this.width = width;

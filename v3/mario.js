@@ -5,7 +5,7 @@ var World = function() {
 
 var world = new World();
 var Hero = function(x, y) {
-  MovingComponent.call(this, x, y, 50, 70);
+  Component.call(this, x, y, 50, 70);
   this.src = "https://tinyurl.com/y9bhauff";
 
   //MAKE HERO JUMP
@@ -38,6 +38,7 @@ var Hero = function(x, y) {
     }
   };
 
+  //SET STATUS OF ENEMY TO COLLECTED SO THAT THEY ARE NOT DRAWN ON THE CANVAS ANYMORE
   this.collectEnemy = function(enemy, ind) {
     enemy.collected = true;
   };
@@ -52,5 +53,5 @@ var Hero = function(x, y) {
   };
 };
 
-Hero.prototype = Object.create(MovingComponent.prototype);
+Hero.prototype = Object.create(Component.prototype);
 Hero.prototype.constructor = Hero;

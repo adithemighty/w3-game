@@ -1,5 +1,5 @@
 var Enemy = function(x, y, width, height) {
-  MovingComponent.call(this, x, y, width, height);
+  Component.call(this, x, y, width, height);
   this.collected = false;
 
   //ENEMIES ONLY MOVE WHEN HERO MOVES
@@ -18,18 +18,18 @@ var Enemy = function(x, y, width, height) {
   };
 
   //GIVES BACK EXTREMITIES POSITION
-  this.top = function() {
-    return this.posY;
-  };
-  this.right = function() {
-    return this.posX + this.width;
-  };
-  this.bottom = function() {
-    return this.posY + this.height;
-  };
-  this.left = function() {
-    return this.posX;
-  };
+  // this.top = function() {
+  //   return this.posY;
+  // };
+  // this.right = function() {
+  //   return this.posX + this.width;
+  // };
+  // this.bottom = function() {
+  //   return this.posY + this.height;
+  // };
+  // this.left = function() {
+  //   return this.posX;
+  // };
 };
 
 var randomNumber;
@@ -47,5 +47,5 @@ function generateRandomNumber(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
 
-Enemy.prototype = Object.create(MovingComponent.prototype);
+Enemy.prototype = Object.create(Component.prototype);
 Enemy.prototype.constructor = Enemy;

@@ -1,18 +1,7 @@
-window.onload = function() {
-  document.getElementById("start-button").onclick = function() {
-    startGame();
-    document.getElementById("start-button").disabled = "disabled";
-  };
-
-  function startGame() {
-    generateEnemies(10);
-    gameStart = Date.now();
-  }
-};
-
-var mario = new Hero(100, 140);
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
+
+var mario = new Hero(100, 140);
 var backgrImg1 = new Background(10, 0, canvas.width, canvas.height - 50);
 var backgrImg2 = new Background(
   backgrImg1.x - backgrImg1.width,
@@ -20,13 +9,19 @@ var backgrImg2 = new Background(
   backgrImg1.width,
   backgrImg1.height
 );
+var platform = new Platform(250, 250, 40, 10)
+
 var enemies = [],
   collectedCats = [];
+
 var intervalId;
+
 var gameStart,
   timePassed = 0;
+
 var playerHorizontalMovementFactor = 0;
-var scores;
+
+var score;
 var collisionDetected = false;
 
 function getNumberOfCollectedCats() {
@@ -42,6 +37,8 @@ function updateCanvas() {
   backgrImg1.drawBackground(backgrImg1, backgrImg2);
   mario.newPos();
   mario.drawHero();
+  platform.newPos();
+  platform.drawPlatform();
   enemies.forEach(function(enemy, ind) {
     mario.detectCollision(enemy);
     enemy.newPos();
@@ -50,11 +47,22 @@ function updateCanvas() {
   showScore();
 
   timePassed = Date.now() - gameStart;
-
   if (Math.floor(timePassed / 1000) >= 30) {
     gameEnd();
     clearInterval(intervalId);
   }
+}
+
+function gameEnd() {
+  console.log("game ended");
+}
+
+function showScore() {
+  score = getNumberOfCollectedCats();
+  ctx.font = "30px monospace";
+  ctx.fillStyle = "white";
+  var text = `Your score: ${score}`;
+  ctx.fillText(text, canvas.width - 250, 50);
 }
 
 document.onkeydown = function(e) {
@@ -79,14 +87,14 @@ document.onkeyup = function(e) {
   }
 };
 
-function gameEnd() {
-  console.log("game ended");
-}
+window.onload = function() {
+  document.getElementById("start-button").onclick = function() {
+    startGame();
+    document.getElementById("start-button").disabled = "disabled";
+  };
 
-function showScore() {
-  score = getNumberOfCollectedCats();
-  ctx.font = "30px monospace";
-  ctx.fillStyle = "white";
-  var text = `Your score: ${score}`;
-  ctx.fillText(text, canvas.width - 250, 50);
-}
+  function startGame() {
+    generateEnemies(10);
+    gameStart = Date.now();
+  }
+};
