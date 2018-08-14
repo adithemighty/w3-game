@@ -1,26 +1,28 @@
 var World = function() {
-  this.gravity = 1.007;
+  this.gravity = 0.1; // The bigger, the more you will be attracted to the earth
+  this.airFriction = 0.02; // The bigger, the smoother the player will go down
   this.ground = canvas.height - 110;
 };
 
 var world = new World();
 var Hero = function(x, y) {
   Component.call(this, x, y, 50, 70);
+  this.speedY = 0;
   this.src = "https://tinyurl.com/y9bhauff";
-
   //MAKE HERO JUMP
   this.jump = function() {
-    if (this.posY >= world.ground - 50) {
-      this.posY -= 50;
+    if (this.posY >= world.ground) {
+      this.speedY = -10;
     }
   };
 
   //CALCULATE NEW POSITION OF HERO
   this.newPos = function() {
+    this.checkCollisionPlatform();
+    this.speedY += world.gravity - world.airFriction * this.speedY;
+    this.posY += this.speedY;
     if (this.posY >= world.ground) {
       this.posY = world.ground;
-    } else {
-      this.posY *= world.gravity;
     }
   };
 
@@ -35,6 +37,14 @@ var Hero = function(x, y) {
       ) {
         this.collectEnemy(enemy);
       }
+    }
+  };
+
+  this.checkCollisionPlatform = function() {
+    if (this.right() >= platform.left() && this.left() <= platform.right()) {
+      platform.collisionPoint = "b";
+    } else {
+      platform.collisionPoint = "bla";
     }
   };
 
