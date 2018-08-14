@@ -5,9 +5,13 @@ var Enemy = function(x, y, width, height) {
   this.width = width;
   this.height = height;
   this.collected = false;
+
+  //ENEMIES ONLY MOVE WHEN HERO MOVES
   this.newPos = function() {
     this.posX -= 1 * playerHorizontalMovementFactor;
   };
+
+  //IF ENEMY IS COLLECTED IT'S NOT DRAWN
   this.drawEnemy = function() {
     if (this.collected === false) {
       ctx.save();
@@ -17,6 +21,7 @@ var Enemy = function(x, y, width, height) {
     }
   };
   
+  //GIVES BACK EXTREMITIES POSITION
   this.top = function() {
     return this.posY;
   };
@@ -32,6 +37,7 @@ var Enemy = function(x, y, width, height) {
 };
 
 var randomNumber;
+
 function generateEnemies(enemNumb) {
   var startingX = canvas.width - 150;
   for (var i = 0; i < enemNumb; i++) {

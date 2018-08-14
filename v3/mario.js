@@ -23,37 +23,48 @@ var Hero = function(x, y) {
     return this.posX;
   };
 
+  //MAKE HERO JUMP
   this.jump = function() {
     if (this.posY >= world.ground - 50) {
       this.posY -= 50;
     }
   };
-  this.newPos = function(enemy) {
+
+  //CALCULATE NEW POSITION OF HERO
+  this.newPos = function() {
     if (this.posY >= world.ground) {
       this.posY = world.ground;
     } else {
       this.posY *= world.gravity;
     }
+  };
 
+  //DETECTS IF HERO COLLIDED WITH ENEMY
+  this.detectCollision = function(enemy) {
     if (enemy && this.right() >= enemy.left()) {
       if (mario.bottom() >= enemy.top() && mario.bottom() <= enemy.bottom()) {
-        console.log("enemy below mario");
         this.collectEnemy(enemy);
       } else if (
         mario.top() <= enemy.bottom() &&
         mario.bottom() >= enemy.bottom()
       ) {
-        console.log("enemy above mario");
         this.collectEnemy(enemy);
       }
     }
+    // console.log(enemy)
   };
-  this.collectEnemy = function(enemy) {
-    console.log(enemies, collectedCats);
+
+  //
+  this.collectEnemy = function(enemy, ind) {
+    // console.log(enemies, collectedCats);
     enemy.collected = true;
-    collectedCats.push(enemy);
-    enemies.splice(0, 1);
+    // if (enemies[ind].collected) {
+    //   collectedCats.push(enemy);
+    //   // enemies.splice(ind, 1);
+    // }
   };
+
+  //DRAW HERO TO CANVAS
   this.drawHero = function() {
     var img = new Image();
     img.src = mario.src;

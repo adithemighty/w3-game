@@ -30,17 +30,20 @@ var scores;
 var collisionDetected = false;
 
 function getNumberOfCollectedCats() {
-  return collectedCats.length;
+  return enemies.filter(function(el) {
+    return el.collected === true;
+  }).length;
 }
 
 //GAMES MAIN LOOP
 function updateCanvas() {
-  backgrImg1.drawBackground(backgrImg1, backgrImg2);
   backgrImg1.newPos();
   backgrImg2.newPos();
+  backgrImg1.drawBackground(backgrImg1, backgrImg2);
+  mario.newPos();
   mario.drawHero();
-  mario.newPos(enemies[0]);
-  enemies.forEach(function(enemy) {
+  enemies.forEach(function(enemy, ind) {
+    mario.detectCollision(enemy);
     enemy.newPos();
     enemy.drawEnemy();
   });
@@ -57,20 +60,17 @@ function updateCanvas() {
 document.onkeydown = function(e) {
   if (e.keyCode === 39) {
     //RIGHT
-    enemies.forEach(function(enemy) {
-      mario.newPos(enemy);
-    });
     playerHorizontalMovementFactor = 1;
   } else if (e.keyCode === 38) {
     //UP
     mario.jump();
-    enemies.forEach(function(enemy) {
-      mario.newPos(enemy);
-    });
   } else if (e.keyCode === 37) {
     //LEFT
     playerHorizontalMovementFactor = -1;
   }
+  // enemies.forEach(function(enemy, ind) {
+  //   mario.newPos(enemy);
+  // });
 };
 
 //Whenever a player presses nothing there should be no movement of the background
