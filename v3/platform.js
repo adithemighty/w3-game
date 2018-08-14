@@ -1,5 +1,3 @@
-console.log("hi");
-
 var Platform = function(x, y, width, height) {
   Component.call(this, x, y, width, height);
   this.drawPlatform = function() {
@@ -11,7 +9,7 @@ var Platform = function(x, y, width, height) {
   this.newPos = function() {
     this.posX -= 1 * playerHorizontalMovementFactor;
   };
-  this.collisionPoint = null
+  this.collisionPoint = null;
 };
 
 Platform.prototype = Object.create(Component.prototype);

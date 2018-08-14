@@ -12,14 +12,14 @@ var Hero = function(x, y) {
   this.src = "https://tinyurl.com/y9bhauff";
   //MAKE HERO JUMP
   this.jump = function() {
-    if (this.posY >= world.ground) {
+    if (this.posY >= world.ground || this.onPlatform) {
+      //HERO CAN'T GO UNDERGROUND
       this.speedY = -10;
     }
   };
 
   //CALCULATE NEW POSITION OF HERO
   this.newPos = function() {
-    this.checkCollisionPlatform();
     this.speedY += world.gravity - world.airFriction * this.speedY;
 
     var newPosY = this.posY + this.speedY;
@@ -30,9 +30,9 @@ var Hero = function(x, y) {
     ) {
       if (this.left() <= platform.right() && this.right() >= platform.left()) {
         newPosY = platform.top() - this.height;
-        this.onPlatform = true;
+        this.onPlatform = false;
       }
-      this.onPlatform = false;
+      this.onPlatform = true;
     }
     // Ground detection
     else if (newPosY >= world.ground) {
@@ -52,14 +52,6 @@ var Hero = function(x, y) {
       ) {
         this.collectEnemy(enemy);
       }
-    }
-  };
-
-  this.checkCollisionPlatform = function() {
-    if (this.right() >= platform.left() && this.left() <= platform.right()) {
-      platform.collisionPoint = "b";
-    } else {
-      platform.collisionPoint = "bla";
     }
   };
 
