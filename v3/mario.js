@@ -5,23 +5,8 @@ var World = function() {
 
 var world = new World();
 var Hero = function(x, y) {
-  this.posX = x;
-  this.posY = y;
+  MovingComponent.call(this, x, y, 50, 70);
   this.src = "https://tinyurl.com/y9bhauff";
-  this.width = 50;
-  this.height = 70;
-  this.top = function() {
-    return this.posY;
-  };
-  this.right = function() {
-    return this.posX + this.width;
-  };
-  this.bottom = function() {
-    return this.posY + this.height;
-  };
-  this.left = function() {
-    return this.posX;
-  };
 
   //MAKE HERO JUMP
   this.jump = function() {
@@ -51,17 +36,10 @@ var Hero = function(x, y) {
         this.collectEnemy(enemy);
       }
     }
-    // console.log(enemy)
   };
 
-  //
   this.collectEnemy = function(enemy, ind) {
-    // console.log(enemies, collectedCats);
     enemy.collected = true;
-    // if (enemies[ind].collected) {
-    //   collectedCats.push(enemy);
-    //   // enemies.splice(ind, 1);
-    // }
   };
 
   //DRAW HERO TO CANVAS
@@ -73,3 +51,6 @@ var Hero = function(x, y) {
     ctx.restore();
   };
 };
+
+Hero.prototype = Object.create(MovingComponent.prototype);
+Hero.prototype.constructor = Hero;

@@ -5,7 +5,7 @@ window.onload = function() {
   };
 
   function startGame() {
-    generateEnemies(5);
+    generateEnemies(10);
     gameStart = Date.now();
   }
 };
@@ -68,9 +68,6 @@ document.onkeydown = function(e) {
     //LEFT
     playerHorizontalMovementFactor = -1;
   }
-  // enemies.forEach(function(enemy, ind) {
-  //   mario.newPos(enemy);
-  // });
 };
 
 //Whenever a player presses nothing there should be no movement of the background
