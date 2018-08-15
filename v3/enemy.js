@@ -32,13 +32,16 @@ function generateEnemies(enemNumb) {
   for (var i = 0; i < enemNumb; i++) {
     randomNumber = generateRandomNumber(sources.length);
     var img = sources[randomNumber];
-    randomNumber = generateRandomNumber(canvas.height);
+    randomNumber = generateRandomNumber(world.ground, 0);
     enemies.push(new Enemy(startingX + 300 * i, randomNumber, 25, 25, img));
   }
 }
 
-function generateRandomNumber(max) {
-  return Math.floor(Math.random() * Math.floor(max));
+function generateRandomNumber(max, min) {
+  if (typeof min == "undefined") {
+    min = 0;
+  }
+  return Math.floor(Math.random() * (max - min) + min);
 }
 
 Enemy.prototype = Object.create(Component.prototype);

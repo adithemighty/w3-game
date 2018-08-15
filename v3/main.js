@@ -72,7 +72,7 @@ function showScore() {
 }
 
 function showTime() {
-  totalTime += (getNumberOfCollectedCats() * 3) / 1000;
+  // totalTime += (getNumberOfCollectedCats() * 3) / 1000;
   var remainingTime = Math.floor(totalTime - timePassed / 1000);
   ctx.font = "30px monospace";
   ctx.fillStyle = "white";
