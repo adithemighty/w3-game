@@ -16,20 +16,6 @@ var Enemy = function(x, y, width, height) {
       ctx.restore();
     }
   };
-
-  //GIVES BACK EXTREMITIES POSITION
-  // this.top = function() {
-  //   return this.posY;
-  // };
-  // this.right = function() {
-  //   return this.posX + this.width;
-  // };
-  // this.bottom = function() {
-  //   return this.posY + this.height;
-  // };
-  // this.left = function() {
-  //   return this.posX;
-  // };
 };
 
 var randomNumber;

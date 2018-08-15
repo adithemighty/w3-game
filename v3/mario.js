@@ -5,11 +5,33 @@ var World = function() {
 };
 
 var world = new World();
-var Hero = function(x, y) {
-  Component.call(this, x, y, 50, 70);
+var Hero = function(x, y,ctx) {
+  Component.call(this, x, y, 50, 100);
   this.speedY = 0;
   this.onPlatform = false;
-  this.src = "https://tinyurl.com/y9bhauff";
+  this.ctx = ctx;
+
+  this.img = new Image();
+  // this.src = './nan.png'
+  this.img.src = "/Users/adiya.m/projects/mario/mario/v3/nan.png";
+
+  this.curColumn = 0;
+  this.curRow = 1;
+  this.frameCount = 4;
+
+  this.spriteWidth = 545;
+  this.spriteHeight = 1049;
+  this.rows = 13;
+  this.columns = 9;
+
+  this.picWidth = this.spriteWidth / this.columns;
+  this.picHeight = this.spriteHeight / this.rows;
+
+  this.srcX = 0;
+  this.srcY = 0;
+
+  this.speed = 100;
+
   //MAKE HERO JUMP
   this.jump = function() {
     if (this.posY >= world.ground || this.onPlatform) {
@@ -62,11 +84,33 @@ var Hero = function(x, y) {
 
   //DRAW HERO TO CANVAS
   this.drawHero = function() {
-    var img = new Image();
-    img.src = mario.src;
-    ctx.save();
-    ctx.drawImage(img, mario.posX, mario.posY, mario.width, mario.height);
-    ctx.restore();
+    this.ctx.save();
+    this.ctx.drawImage(
+      this.img,
+      this.srcX,
+      this.srcY,
+      this.picWidth,
+      this.picHeight,
+      this.posX,
+      this.posY,
+      this.width,
+      this.height
+    );
+    this.ctx.restore();
+  };
+
+  this.ownAnimation = function() {
+    this.ctx.clearRect(0, 0, canvas.width, canvas.height);
+    this.ownInterval = setInterval(
+      this._updateOwnAnimation.bind(this),
+      this.speed
+    );
+  };
+
+  this._updateOwnAnimation = function() {
+    this.curColumn = ++this.curColumn % this.frameCount;
+    this.srcX = this.curColumn * this.picWidth;
+    this.srcY = this.curRow * this.picHeight;
   };
 };
 

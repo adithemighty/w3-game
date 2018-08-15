@@ -1,16 +1,9 @@
-var canvas = document.getElementById("canvas");
-var ctx = canvas.getContext("2d");
-
-var mario = new Hero(100, 140);
-var backgrImg1 = new Background(10, 0, canvas.width, canvas.height - 50);
-var backgrImg2 = new Background(
-  backgrImg1.x - backgrImg1.width,
-  0,
-  backgrImg1.width,
-  backgrImg1.height
-);
-var platform = new Platform(250, 250, 40, 10);
-
+var canvas;
+var ctx;
+var backgrImg1;
+var backgrImg2;
+var platform;
+var mario;
 var enemies = [],
   collectedCats = [];
 
@@ -23,6 +16,8 @@ var playerHorizontalMovementFactor = 0;
 
 var score;
 var collisionDetected = false;
+
+
 
 function getNumberOfCollectedCats() {
   return enemies.filter(function(el) {
@@ -86,6 +81,17 @@ document.onkeyup = function(e) {
 };
 
 window.onload = function() {
+  canvas = document.getElementById("canvas");
+  ctx = canvas.getContext("2d");
+  backgrImg1 = new Background(10, 0, canvas.width, canvas.height - 50);
+  backgrImg2 = new Background(
+    backgrImg1.x - backgrImg1.width,
+    0,
+    backgrImg1.width,
+    backgrImg1.height
+  );
+  platform = new Platform(250, 250, 40, 10);
+  
   document.getElementById("start-button").onclick = function() {
     startGame();
     document.getElementById("start-button").disabled = "disabled";
@@ -94,5 +100,7 @@ window.onload = function() {
   function startGame() {
     generateEnemies(10);
     gameStart = Date.now();
+    mario = new Hero(100, 140, ctx);
+    mario.ownAnimation();
   }
 };
