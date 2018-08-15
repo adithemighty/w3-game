@@ -28,7 +28,7 @@ var sources = [
 ];
 
 function generateEnemies(enemNumb) {
-  var startingX = canvas.width - 150;
+  var startingX = canvas.width - 450;
   for (var i = 0; i < enemNumb; i++) {
     randomNumber = generateRandomNumber(sources.length);
     var img = sources[randomNumber];

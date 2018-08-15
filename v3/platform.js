@@ -14,7 +14,10 @@ var Platform = function(x, y, width, height) {
 Platform.prototype = Object.create(Component.prototype);
 Platform.prototype.constructor = Platform;
 
-
-function generatePlatform(){
-    //find position to put platform
+function generatePlatforms(numOfPlatf) {
+  var startingX = canvas.width - 450;
+  //find position to put platform
+  for (var i = 0; i < numOfPlatf; i++) {
+    platforms.push(new Platform());
+  }
 }

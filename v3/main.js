@@ -5,7 +5,8 @@ var backgrImg2;
 var platform;
 var mario;
 var enemies = [],
-  collectedCats = [];
+  collectedCats = [],
+  platforms = [];
 
 var intervalCanvas;
 var intervalScore;

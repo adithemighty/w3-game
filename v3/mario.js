@@ -1,11 +1,11 @@
 var world = {
   gravity: 0.1,
   airFriction: 0.02,
-  ground: canvas.height - 120
+  ground: canvas.height - 200
 };
 
 var Hero = function(x, y, ctx) {
-  Component.call(this, x, y, 50, 100);
+  Component.call(this, x, y, 100, 150);
   this.speedY = 0;
   this.onPlatform = false;
   this.ctx = ctx;
@@ -18,7 +18,7 @@ var Hero = function(x, y, ctx) {
   this.frameCount = 4;
 
   this.spriteWidth = 545;
-  this.spriteHeight = 1049;
+  this.spriteHeight = 1000;
   this.rows = 13;
   this.columns = 9;
 
@@ -46,7 +46,7 @@ var Hero = function(x, y, ctx) {
     // Platforms detection
     this.onPlatform = false;
     if (
-      newPosY + this.height >= platform.top() &&
+      platform.top() <= newPosY + this.height &&
       platform.bottom() >= newPosY + this.height
     ) {
       if (this.left() <= platform.right() && this.right() >= platform.left()) {
@@ -58,6 +58,7 @@ var Hero = function(x, y, ctx) {
     else if (newPosY >= world.ground) {
       newPosY = world.ground;
     }
+    // console.log(this.posY);
     this.posY = newPosY;
   };
 
