@@ -15,9 +15,10 @@ Platform.prototype = Object.create(Component.prototype);
 Platform.prototype.constructor = Platform;
 
 function generatePlatforms(numOfPlatf) {
-  var startingX = canvas.width - 450;
+  var startingX = canvas.width - 300;
   //find position to put platform
   for (var i = 0; i < numOfPlatf; i++) {
-    platforms.push(new Platform());
+    randomNumber = generateRandomNumber(world.ground, 0);
+    platforms.push(new Platform(startingX - 100 * i, randomNumber, 30, 10));
   }
 }

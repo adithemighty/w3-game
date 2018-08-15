@@ -1,7 +1,7 @@
 var world = {
   gravity: 0.1,
   airFriction: 0.02,
-  ground: canvas.height - 300
+  ground: canvas.height - 200
 };
 
 var Hero = function(x, y, ctx) {
@@ -51,7 +51,7 @@ var Hero = function(x, y, ctx) {
   };
 
   //CALCULATE NEW POSITION OF HERO
-  this.newPos = function() {
+  this.newPos = function(platform) {
     this.speedY += world.gravity - world.airFriction * this.speedY;
 
     var newPosY = this.posY + this.speedY;

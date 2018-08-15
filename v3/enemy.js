@@ -38,12 +38,5 @@ function generateEnemies(enemNumb) {
   }
 }
 
-function generateRandomNumber(max, min) {
-  if (typeof min == "undefined") {
-    min = 0;
-  }
-  return Math.floor(Math.random() * (max - min) + min);
-}
-
 Enemy.prototype = Object.create(Component.prototype);
 Enemy.prototype.constructor = Enemy;

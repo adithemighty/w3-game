@@ -32,11 +32,16 @@ function updateCanvas() {
   backgrImg1.newPos();
   backgrImg2.newPos();
   backgrImg1.drawBackground(backgrImg1, backgrImg2);
-  mario.newPos();
+  // platform.newPos();
+  // platform.drawPlatform();
   mario.drawHero();
-  platform.newPos();
-  platform.drawPlatform();
-  enemies.forEach(function(enemy, ind) {
+
+  platforms.forEach(function(platform) {
+    mario.newPos(platform);
+    platform.newPos();
+    platform.drawPlatform();
+  });
+  enemies.forEach(function(enemy) {
     mario.detectCollision(enemy);
     enemy.newPos();
     enemy.drawEnemy();
@@ -111,7 +116,7 @@ window.onload = function() {
     backgrImg1.width,
     backgrImg1.height
   );
-  platform = new Platform(250, 250, 40, 10);
+  // platform = new Platform(250, 250, 40, 10);
   startGame();
 
   document.getElementById("start-button").onclick = function() {
@@ -121,7 +126,7 @@ window.onload = function() {
 
   function startGame() {
     generateEnemies(10);
-    // generatePlatform();
+    generatePlatforms(2);
     gameStart = Date.now();
     mario = new Hero(50, 70, ctx);
     mario.ownAnimation();
