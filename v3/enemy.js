@@ -14,8 +14,6 @@ var Enemy = function(x, y, width, height, src) {
     if (this.collected === false) {
       ctx.save();
       ctx.drawImage(this.img, this.posX, this.posY, 70, 70);
-      // ctx.fillStyle = "red";
-      // ctx.fillRect(this.posX, this.posY, this.width, this.height);
       ctx.restore();
     }
   };

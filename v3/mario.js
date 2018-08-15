@@ -1,11 +1,10 @@
-var World = function() {
-  this.gravity = 0.1; // The bigger, the more you will be attracted to the earth
-  this.airFriction = 0.02; // The bigger, the smoother the player will go down
-  this.ground = canvas.height - 110;
+var world = {
+  gravity: 0.1,
+  airFriction: 0.02,
+  ground: canvas.height - 120
 };
 
-var world = new World();
-var Hero = function(x, y,ctx) {
+var Hero = function(x, y, ctx) {
   Component.call(this, x, y, 50, 100);
   this.speedY = 0;
   this.onPlatform = false;
