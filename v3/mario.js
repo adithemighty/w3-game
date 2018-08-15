@@ -13,7 +13,7 @@ var Hero = function(x, y,ctx) {
 
   this.img = new Image();
   // this.src = './nan.png'
-  this.img.src = "/Users/adiya.m/projects/mario/mario/v3/nan.png";
+  this.img.src = "./v3/nan.png";
 
   this.curColumn = 0;
   this.curRow = 1;
