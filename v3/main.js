@@ -126,7 +126,7 @@ window.onload = function() {
 
   function startGame() {
     generateEnemies(10);
-    generatePlatforms(2);
+    generatePlatforms(10);
     gameStart = Date.now();
     mario = new Hero(50, 70, ctx);
     mario.ownAnimation();

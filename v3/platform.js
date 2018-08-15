@@ -18,7 +18,8 @@ function generatePlatforms(numOfPlatf) {
   var startingX = canvas.width - 300;
   //find position to put platform
   for (var i = 0; i < numOfPlatf; i++) {
-    randomNumber = generateRandomNumber(world.ground, 0);
-    platforms.push(new Platform(startingX - 100 * i, randomNumber, 30, 10));
+    randomHeight = generateRandomNumber(world.ground, 300);
+    randomLenght = generateRandomNumber(100, 50);
+    platforms.push(new Platform(startingX + 300 * i, randomHeight, randomLenght, 10));
   }
 }
