@@ -9,7 +9,6 @@ var Platform = function(x, y, width, height) {
   this.newPos = function() {
     this.posX -= 1 * playerHorizontalMovementFactor;
   };
-  this.collisionPoint = null;
 };
 
 Platform.prototype = Object.create(Component.prototype);

@@ -9,7 +9,7 @@ var backgrImg2 = new Background(
   backgrImg1.width,
   backgrImg1.height
 );
-var platform = new Platform(250, 250, 40, 10)
+var platform = new Platform(250, 250, 40, 10);
 
 var enemies = [],
   collectedCats = [];
@@ -80,9 +80,7 @@ document.onkeydown = function(e) {
 
 //Whenever a player presses nothing there should be no movement of the background
 document.onkeyup = function(e) {
-  if (e.keyCode === 39) {
-    playerHorizontalMovementFactor = 0;
-  } else if (e.keyCode === 37) {
+  if (e.keyCode === 39 || e.keyCode === 37) {
     playerHorizontalMovementFactor = 0;
   }
 };

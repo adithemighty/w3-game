@@ -24,15 +24,15 @@ var Hero = function(x, y) {
 
     var newPosY = this.posY + this.speedY;
     // Platforms detection
+    this.onPlatform = false;
     if (
-      this.bottom() <= platform.top() &&
-      platform.top() < newPosY + this.height
+      newPosY + this.height >= platform.top() &&
+      platform.bottom() >= newPosY + this.height
     ) {
       if (this.left() <= platform.right() && this.right() >= platform.left()) {
         newPosY = platform.top() - this.height;
-        this.onPlatform = false;
+        this.onPlatform = true;
       }
-      this.onPlatform = true;
     }
     // Ground detection
     else if (newPosY >= world.ground) {
