@@ -32,12 +32,11 @@ function updateCanvas() {
   backgrImg1.newPos();
   backgrImg2.newPos();
   backgrImg1.drawBackground(backgrImg1, backgrImg2);
-  // platform.newPos();
-  // platform.drawPlatform();
+  
   mario.drawHero();
+  mario.newPos(platforms);
 
   platforms.forEach(function(platform) {
-    mario.newPos(platform);
     platform.newPos();
     platform.drawPlatform();
   });
@@ -103,6 +102,7 @@ document.onkeydown = function(e) {
 document.onkeyup = function(e) {
   if (e.keyCode === 39 || e.keyCode === 37) {
     playerHorizontalMovementFactor = 0;
+  } else {
   }
 };
 

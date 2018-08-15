@@ -7,7 +7,6 @@ var world = {
 var Hero = function(x, y, ctx) {
   Component.call(this, x, y, 100, 150);
   this.speedY = 0;
-  this.onPlatform = false;
   this.ctx = ctx;
   this.src = "./v3/nan.png";
 
@@ -51,26 +50,42 @@ var Hero = function(x, y, ctx) {
   };
 
   //CALCULATE NEW POSITION OF HERO
-  this.newPos = function(platform) {
+  this.newPos = function(platforms) {
     this.speedY += world.gravity - world.airFriction * this.speedY;
 
     var newPosY = this.posY + this.speedY;
-    // Platforms detection
     this.onPlatform = false;
-    if (
-      platform.top() <= newPosY + this.height &&
-      platform.bottom() >= newPosY + this.height
-    ) {
-      if (this.left() <= platform.right() && this.right() >= platform.left()) {
-        newPosY = platform.top() - this.height;
-        this.onPlatform = true;
-      }
-    }
+    platforms.forEach(
+      function(platform) {
+        if (
+          platform.top() <= newPosY + this.height &&
+          newPosY + this.height <= platform.bottom()
+        ) {
+          if (
+            this.left() <= platform.right() &&
+            this.right() >= platform.left()
+          ) {
+            newPosY = platform.top() - this.height;
+            this.onPlatform = true;
+          }
+        }
+      }.bind(this)
+    );
     // Ground detection
-    else if (newPosY >= world.ground) {
+    if (newPosY >= world.ground) {
       newPosY = world.ground;
     }
     this.posY = newPosY;
+  };
+
+  this.detectPlatform = function(platform) {
+    if (this.bottom() <= platform.bottom()) {
+      if (this.left() >= platform.right() && this.right() <= platform.left()) {
+        return true;
+      }
+    } else {
+      return false;
+    }
   };
 
   //DETECTS IF HERO COLLIDED WITH ENEMY
