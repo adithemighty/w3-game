@@ -12,7 +12,6 @@ var Hero = function(x, y,ctx) {
   this.ctx = ctx;
 
   this.img = new Image();
-  // this.src = './nan.png'
   this.img.src = "./v3/nan.png";
 
   this.curColumn = 0;

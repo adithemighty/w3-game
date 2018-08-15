@@ -1,6 +1,8 @@
 var Enemy = function(x, y, width, height) {
   Component.call(this, x, y, width, height);
   this.collected = false;
+  this.img = new Image();
+  this.img.src = "https://tinyurl.com/y8ymv6cr";
 
   //ENEMIES ONLY MOVE WHEN HERO MOVES
   this.newPos = function() {
@@ -11,8 +13,9 @@ var Enemy = function(x, y, width, height) {
   this.drawEnemy = function() {
     if (this.collected === false) {
       ctx.save();
-      ctx.fillStyle = "red";
-      ctx.fillRect(this.posX, this.posY, this.width, this.height);
+      ctx.drawImage(this.img, this.posX, this.posY)
+      // ctx.fillStyle = "red";
+      // ctx.fillRect(this.posX, this.posY, this.width, this.height);
       ctx.restore();
     }
   };
