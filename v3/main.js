@@ -7,11 +7,13 @@ var mario;
 var enemies = [],
   collectedCats = [];
 
-var intervalId;
+var intervalCanvas;
+var intervalScore;
 
 var gameStart,
   timePassed = 0,
-  totalTime = 30;
+  initTime = 10,
+  totalTime = 10;
 
 var playerHorizontalMovementFactor = 0;
 
@@ -38,14 +40,21 @@ function updateCanvas() {
     enemy.newPos();
     enemy.drawEnemy();
   });
+  // updateScore();
   showScore();
   showTime();
 
   timePassed = Date.now() - gameStart;
   if (Math.floor(timePassed / 1000) >= totalTime) {
+    clearInterval(intervalCanvas);
+    clearInterval(intervalScore);
     gameEnd();
-    clearInterval(intervalId);
   }
+}
+
+function updateScore() {
+  totalTime = initTime + getNumberOfCollectedCats();
+  // console.log(totalTime);
 }
 
 function gameEnd() {
@@ -54,14 +63,17 @@ function gameEnd() {
 
 function showScore() {
   score = getNumberOfCollectedCats();
+  ctx.save();
   ctx.font = "30px monospace";
   ctx.fillStyle = "white";
   var text = `Your score: ${score}`;
   ctx.fillText(text, canvas.width - 250, 50);
+  ctx.restore();
 }
 
 function showTime() {
-  var remainingTime = Math.floor(totalTime - timePassed / 1000)
+  totalTime += (getNumberOfCollectedCats() * 3) / 1000;
+  var remainingTime = Math.floor(totalTime - timePassed / 1000);
   ctx.font = "30px monospace";
   ctx.fillStyle = "white";
   var text = `Remaining time: ${remainingTime}`;
@@ -99,16 +111,20 @@ window.onload = function() {
     backgrImg1.height
   );
   platform = new Platform(250, 250, 40, 10);
+  startGame();
 
   document.getElementById("start-button").onclick = function() {
-    startGame();
+    // startGame();
     document.getElementById("start-button").disabled = "disabled";
   };
 
   function startGame() {
     generateEnemies(10);
+    // generatePlatform();
     gameStart = Date.now();
     mario = new Hero(50, 70, ctx);
     mario.ownAnimation();
+    intervalCanvas = setInterval(updateCanvas, 1);
+    intervalScore = setInterval(updateScore, 1000);
   }
 };

@@ -23,7 +23,6 @@ var randomNumber;
 var sources = [
   "https://tinyurl.com/y8jwf3vv",
   "https://tinyurl.com/y8ymv6cr",
-  "https://tinyurl.com/y8bggj5w",
   "https://tinyurl.com/yd2d4poq",
   "https://tinyurl.com/y74gs578"
 ];
@@ -36,7 +35,6 @@ function generateEnemies(enemNumb) {
     randomNumber = generateRandomNumber(canvas.height);
     enemies.push(new Enemy(startingX + 300 * i, randomNumber, 25, 25, img));
   }
-  intervalId = setInterval(updateCanvas, 1);
 }
 
 function generateRandomNumber(max) {

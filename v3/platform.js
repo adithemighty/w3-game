@@ -13,3 +13,8 @@ var Platform = function(x, y, width, height) {
 
 Platform.prototype = Object.create(Component.prototype);
 Platform.prototype.constructor = Platform;
+
+
+function generatePlatform(){
+    //find position to put platform
+}
