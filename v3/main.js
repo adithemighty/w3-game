@@ -14,7 +14,7 @@ var intervalScore;
 var gameStart,
   timePassed = 0,
   initTime = 10,
-  totalTime = 10;
+  totalTime = 100;
 
 var playerHorizontalMovementFactor = 0;
 
@@ -54,7 +54,7 @@ function updateCanvas() {
 }
 
 function updateScore() {
-  totalTime = initTime + getNumberOfCollectedCats();
+  // totalTime = initTime + getNumberOfCollectedCats();
   // console.log(totalTime);
 }
 

@@ -58,7 +58,6 @@ var Hero = function(x, y, ctx) {
     else if (newPosY >= world.ground) {
       newPosY = world.ground;
     }
-    // console.log(this.posY);
     this.posY = newPosY;
   };
 

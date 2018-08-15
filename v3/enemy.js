@@ -24,7 +24,8 @@ var sources = [
   "https://tinyurl.com/y8jwf3vv",
   "https://tinyurl.com/y8ymv6cr",
   "https://tinyurl.com/yd2d4poq",
-  "https://tinyurl.com/y74gs578"
+  "https://tinyurl.com/y74gs578",
+  './v3/cat.png'
 ];
 
 function generateEnemies(enemNumb) {
