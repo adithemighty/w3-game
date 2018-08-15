@@ -1,8 +1,8 @@
-var Enemy = function(x, y, width, height) {
+var Enemy = function(x, y, width, height, src) {
   Component.call(this, x, y, width, height);
   this.collected = false;
   this.img = new Image();
-  this.img.src = "https://tinyurl.com/y8ymv6cr";
+  this.img.src = src;
 
   //ENEMIES ONLY MOVE WHEN HERO MOVES
   this.newPos = function() {
@@ -13,7 +13,7 @@ var Enemy = function(x, y, width, height) {
   this.drawEnemy = function() {
     if (this.collected === false) {
       ctx.save();
-      ctx.drawImage(this.img, this.posX, this.posY)
+      ctx.drawImage(this.img, this.posX, this.posY, 70, 70);
       // ctx.fillStyle = "red";
       // ctx.fillRect(this.posX, this.posY, this.width, this.height);
       ctx.restore();
@@ -22,12 +22,21 @@ var Enemy = function(x, y, width, height) {
 };
 
 var randomNumber;
+var sources = [
+  "https://tinyurl.com/y8jwf3vv",
+  "https://tinyurl.com/y8ymv6cr",
+  "https://tinyurl.com/y8bggj5w",
+  "https://tinyurl.com/yd2d4poq",
+  "https://tinyurl.com/y74gs578"
+];
 
 function generateEnemies(enemNumb) {
   var startingX = canvas.width - 150;
   for (var i = 0; i < enemNumb; i++) {
+    randomNumber = generateRandomNumber(sources.length);
+    var img = sources[randomNumber];
     randomNumber = generateRandomNumber(canvas.height);
-    enemies.push(new Enemy(startingX + 300 * i, randomNumber, 25, 25));
+    enemies.push(new Enemy(startingX + 300 * i, randomNumber, 25, 25, img));
   }
   intervalId = setInterval(updateCanvas, 1);
 }
