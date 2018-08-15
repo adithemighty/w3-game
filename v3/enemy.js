@@ -13,7 +13,7 @@ var Enemy = function(x, y, width, height, src) {
   this.drawEnemy = function() {
     if (this.collected === false) {
       ctx.save();
-      ctx.drawImage(this.img, this.posX, this.posY, 70, 70);
+      ctx.drawImage(this.img, this.posX, this.posY, 90, 90);
       ctx.restore();
     }
   };
@@ -25,7 +25,8 @@ var sources = [
   "https://tinyurl.com/y8ymv6cr",
   "https://tinyurl.com/yd2d4poq",
   "https://tinyurl.com/y74gs578",
-  './v3/cat.png'
+  "./v3/cat.png",
+  "./v3/cat_of_lisa.png"
 ];
 
 function generateEnemies(enemNumb) {
