@@ -1,7 +1,7 @@
 var world = {
   gravity: 0.1,
   airFriction: 0.02,
-  ground: canvas.height - 200
+  ground: canvas.height - 300
 };
 
 var Hero = function(x, y, ctx) {
@@ -9,13 +9,25 @@ var Hero = function(x, y, ctx) {
   this.speedY = 0;
   this.onPlatform = false;
   this.ctx = ctx;
+  this.src = "./v3/nan.png";
+
+  this.runningAnimation = {
+    curRow: 1,
+    frameCount: 5
+  };
+
+  this.idlingAnimation = {
+    curColumn: 0,
+    curRow: 0,
+    frameCount: 4
+  };
 
   this.img = new Image();
-  this.img.src = "./v3/nan.png";
+  this.img.src = this.src;
 
   this.curColumn = 0;
-  this.curRow = 1;
-  this.frameCount = 4;
+  this.curRow = this.idlingAnimation.curRow;
+  this.frameCount = this.idlingAnimation.frameCount;
 
   this.spriteWidth = 545;
   this.spriteHeight = 1000;
@@ -82,6 +94,14 @@ var Hero = function(x, y, ctx) {
 
   //DRAW HERO TO CANVAS
   this.drawHero = function() {
+    if (playerHorizontalMovementFactor !== 0) {
+      this.curRow = this.runningAnimation.curRow;
+      this.frameCount = this.runningAnimation.frameCount;
+    } else if (playerHorizontalMovementFactor === 0) {
+      this.curRow = this.idlingAnimation.curRow;
+      this.frameCount = this.idlingAnimation.frameCount;
+    }
+
     this.ctx.save();
     this.ctx.drawImage(
       this.img,
