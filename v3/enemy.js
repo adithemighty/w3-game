@@ -33,6 +33,7 @@ var sources = [
   "https://tinyurl.com/yd2d4poq",
   "https://tinyurl.com/y74gs578",
   "./v3/pictures/cat.png",
+  "https://tinyurl.com/ycb5woup",
   "./v3/pictures/dog.png",
   "./v3/pictures/cat_of_lisa.png"
 ];

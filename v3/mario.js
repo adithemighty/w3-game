@@ -117,7 +117,7 @@ var Hero = function(x, y, ctx) {
   this.spawnPlatform = function() {
     //spawns a new platform just on top of hero
     if (this.platformsLeft) {
-      generatePlatforms(this.posX + this.width / 2, this.posY - 50);
+      generatePlatforms(this.posX + this.width / 2, this.bottom());
     }
   };
 
