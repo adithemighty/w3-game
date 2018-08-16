@@ -4,7 +4,7 @@
 var gameStart,
   timePassed = 0,
   initTime = 10,
-  totalTime = 100;
+  totalTime = 25;
 var score = 0;
 var initNoOfPlatforms = 3,
   platformsLeft = initNoOfPlatforms;

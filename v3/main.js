@@ -16,6 +16,8 @@ var playerHorizontalMovementFactor = 0;
 
 var collisionDetected = false;
 
+var gameStarted = false;
+
 //GAMES MAIN LOOP
 function updateCanvas() {
   backgrImg1.newPos();
@@ -37,7 +39,7 @@ function updateCanvas() {
   showNoOfPlatforms();
 
   timePassed = Date.now() - gameStart;
-  if (Math.floor(timePassed / 1000) >= totalTime) {
+  if (Math.floor(timePassed / 1000) >= totalTime || getNumberOfCollectedCats() === enemies.length) {
     clearInterval(intervalCanvas);
     clearInterval(intervalScore);
     gameEnd();
@@ -45,22 +47,61 @@ function updateCanvas() {
 }
 
 function gameEnd() {
-  console.log("game ended");
+  var victoryText =
+    "You did well, but some of these pets will die in this forest now";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  displayText({
+    text: "GAME OVER",
+    value: "",
+    x: canvas.width / 2 - 100,
+    y: 50
+  });
+  displayText({
+    text: "Cats collected: ",
+    value: getNumberOfCollectedCats(),
+    x: canvas.width / 2 - 150,
+    y: 100
+  });
+  displayText({
+    text: "of ",
+    value: enemies.length,
+    x: canvas.width / 2 + 150,
+    y: 100
+  });
+  if (getNumberOfCollectedCats() === enemies.length) {
+    victoryText = `You collected all pets and they don't have to die in the forest`;
+  }
+  displayText({
+    text: victoryText,
+    value: "",
+    x: 20,
+    y: 200
+  });
+  displayText({
+    text: 'Refresh to start new game',
+    value: "",
+    x: canvas.width / 2-150,
+    y: 250
+  });
 }
 
 document.onkeydown = function(e) {
-  if (e.keyCode === 39) {
-    //RIGHT
-    playerHorizontalMovementFactor = 1;
-  } else if (e.keyCode === 38) {
-    //UP
-    mario.jump();
-    mario.isJumping = true;
-  } else if (e.keyCode === 37) {
-    //LEFT
-    playerHorizontalMovementFactor = -1;
-  } else if (e.keyCode === 32) {
-    mario.spawnPlatform();
+  if (gameStarted) {
+    if (e.keyCode === 39) {
+      //RIGHT
+      playerHorizontalMovementFactor = 1;
+    } else if (e.keyCode === 38) {
+      //UP
+      mario.jump();
+      mario.isJumping = true;
+    } else if (e.keyCode === 37) {
+      //LEFT
+      playerHorizontalMovementFactor = -1;
+    } else if (e.keyCode === 32) {
+      mario.spawnPlatform();
+    }
+  } else {
+    intro.counter++;
   }
 };
 
@@ -86,17 +127,11 @@ window.onload = function() {
   intro = new Intro();
   intervalIntro = setInterval(checkIntro);
 
-  document.getElementById("start-button").onclick = function() {
-    document.getElementById("start-button").disabled = "disabled";
-  };
-
   function checkIntro() {
     if (intro.checkIfDone()) {
+      gameStarted = true;
       startGame();
-      clearInterval(intervalIntro)
-    } else {
-      intro.counter++
-      console.log("intro is not done yet");
+      clearInterval(intervalIntro);
     }
   }
 
