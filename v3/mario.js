@@ -1,7 +1,7 @@
 var world = {
   gravity: 0.1,
   airFriction: 0.02,
-  ground: canvas.height - 200
+  ground: canvas.height - 150
 };
 
 var Hero = function(x, y, ctx) {
@@ -118,6 +118,10 @@ var Hero = function(x, y, ctx) {
     //spawns a new platform just on top of hero
     if (this.platformsLeft) {
       generatePlatforms(this.posX + this.width / 2, this.bottom());
+    }
+
+    if(platforms.length >= maxNoOfPlatforms){
+      this.platformsLeft = false;
     }
   };
 

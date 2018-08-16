@@ -13,7 +13,7 @@ var Enemy = function(x, y, width, height, src) {
   this.drawEnemy = function() {
     if (this.collected === false) {
       ctx.save();
-      ctx.drawImage(this.img, this.posX, this.posY, 90, 90);
+      ctx.drawImage(this.img, this.posX, this.posY, 70, 70);
       ctx.restore();
     }
   };

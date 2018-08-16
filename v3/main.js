@@ -2,11 +2,12 @@ var canvas;
 var ctx;
 var backgrImg1;
 var backgrImg2;
-var platform;
+var platform,
+  platforms = [],
+  maxNoOfPlatforms = 3;
 var mario;
 var enemies = [],
-  collectedCats = [],
-  platforms = [];
+  collectedCats = [];
 
 var intervalCanvas;
 var intervalScore;
@@ -96,8 +97,8 @@ document.onkeydown = function(e) {
   } else if (e.keyCode === 37) {
     //LEFT
     playerHorizontalMovementFactor = -1;
-  } else if(e.keyCode === 32){
-    mario.spawnPlatform()
+  } else if (e.keyCode === 32) {
+    mario.spawnPlatform();
   }
 };
 
@@ -105,8 +106,8 @@ document.onkeydown = function(e) {
 document.onkeyup = function(e) {
   if (e.keyCode === 39 || e.keyCode === 37) {
     playerHorizontalMovementFactor = 0;
-  } else if(e.keyCode === 38){
-    mario.isJumping = false
+  } else if (e.keyCode === 38) {
+    mario.isJumping = false;
   }
 };
 
