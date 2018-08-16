@@ -96,6 +96,6 @@ window.onload = function() {
     mario = new Hero(50, 70, ctx);
     mario.ownAnimation();
     intervalCanvas = setInterval(updateCanvas, 1);
-    intervalScore = setInterval(calculateStats, 1000);
+    intervalScore = setInterval(calculatePlatforms, 1000);
   }
 };

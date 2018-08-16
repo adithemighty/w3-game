@@ -15,9 +15,16 @@ function getNumberOfCollectedCats() {
   }).length;
 }
 
-function calculateStats() {
-    platformsLeft =
-    initNoOfPlatforms + Math.floor(getNumberOfCollectedCats() / 2) - platforms.length;
+function calculatePlatforms() {
+  platformsLeft =
+    initNoOfPlatforms +
+    Math.floor(getNumberOfCollectedCats() / 2) -
+    platforms.length;
+  if (platformsLeft <= 0) {
+    mario.platformsLeft = false;
+  } else {
+    mario.platformsLeft = true;
+  }
 }
 
 function showScore() {

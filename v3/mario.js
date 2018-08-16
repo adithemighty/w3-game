@@ -120,7 +120,7 @@ var Hero = function(x, y, ctx) {
       generatePlatforms(this.posX + this.width / 2, this.bottom());
     }
 
-    if(platforms.length >= maxNoOfPlatforms){
+    if(platforms.length >= platformsLeft){
       this.platformsLeft = false;
     }
   };
