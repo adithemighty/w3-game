@@ -23,7 +23,6 @@ var Enemy = function(x, y, width, height, src) {
     audio.play();
     audio.volume = 0.01;
     // audio.loop = false;
-    console.log('sound')
   };
 };
 
@@ -34,6 +33,7 @@ var sources = [
   "https://tinyurl.com/yd2d4poq",
   "https://tinyurl.com/y74gs578",
   "./v3/pictures/cat.png",
+  "./v3/pictures/dog.png",
   "./v3/pictures/cat_of_lisa.png"
 ];
 

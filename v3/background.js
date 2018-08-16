@@ -3,7 +3,7 @@ var Background = function(x, y, width, height) {
   this.y = y;
   this.width = width;
   this.height = height;
-  this.src = "https://tinyurl.com/ycelb88y";
+  this.src = "./v3/pictures/background.png";
   this.newPos = function() {
     if (this.x < 0 - canvas.width) {
       this.x = canvas.width;

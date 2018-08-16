@@ -23,3 +23,8 @@ function generatePlatforms(numOfPlatf) {
     platforms.push(new Platform(startingX + 500 * i, randomHeight, randomLenght, 10));
   }
 }
+
+//when enemies are created i need to check
+//if a platform is needed
+
+//if enemy.bottom() is lower
