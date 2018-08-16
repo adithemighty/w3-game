@@ -22,9 +22,7 @@ function updateCanvas() {
   backgrImg2.newPos();
   backgrImg1.drawBackground(backgrImg1, backgrImg2);
 
-  mario.drawHero();
   mario.newPos(platforms);
-
   platforms.forEach(function(platform) {
     platform.newPos();
     platform.drawPlatform();
@@ -33,6 +31,7 @@ function updateCanvas() {
     enemy.newPos();
     enemy.drawEnemy();
   });
+  mario.drawHero();
   showScore();
   showTime();
   showNoOfPlatforms();
@@ -84,11 +83,22 @@ window.onload = function() {
     backgrImg1.width,
     backgrImg1.height
   );
-  startGame();
+  intro = new Intro();
+  intervalIntro = setInterval(checkIntro);
 
   document.getElementById("start-button").onclick = function() {
     document.getElementById("start-button").disabled = "disabled";
   };
+
+  function checkIntro() {
+    if (intro.checkIfDone()) {
+      startGame();
+      clearInterval(intervalIntro)
+    } else {
+      intro.counter++
+      console.log("intro is not done yet");
+    }
+  }
 
   function startGame() {
     generateEnemies(10);
