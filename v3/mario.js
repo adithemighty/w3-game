@@ -10,6 +10,7 @@ var Hero = function(x, y, ctx) {
   this.ctx = ctx;
   this.src = "./v3/pictures/nan.png";
   this.isJumping = false;
+  this.platformsLeft = true;
 
   this.runningAnimation = {
     curRow: 1,
@@ -85,7 +86,7 @@ var Hero = function(x, y, ctx) {
     this.posY = newPosY;
     enemies.forEach(
       function(enemy) {
-        this.detectCollision(enemy);
+        this.detectEnemy(enemy);
       }.bind(this)
     );
   };
@@ -100,8 +101,7 @@ var Hero = function(x, y, ctx) {
     }
   };
 
-  //DETECTS IF HERO COLLIDED WITH ENEMY
-  this.detectCollision = function(enemy) {
+  this.detectEnemy = function(enemy) {
     if (this.right() >= enemy.left() && this.left() <= enemy.right()) {
       if (mario.bottom() >= enemy.top() && mario.bottom() <= enemy.bottom()) {
         this.collectEnemy(enemy);
@@ -111,6 +111,13 @@ var Hero = function(x, y, ctx) {
       ) {
         this.collectEnemy(enemy);
       }
+    }
+  };
+
+  this.spawnPlatform = function() {
+    //spawns a new platform just on top of hero
+    if (this.platformsLeft) {
+      generatePlatforms(this.posX + this.width / 2, this.posY - 50);
     }
   };
 

@@ -14,17 +14,10 @@ var Platform = function(x, y, width, height) {
 Platform.prototype = Object.create(Component.prototype);
 Platform.prototype.constructor = Platform;
 
-function generatePlatforms(numOfPlatf) {
-  var startingX = canvas.width - 300;
-  //find position to put platform
-  for (var i = 0; i < numOfPlatf; i++) {
-    randomHeight = generateRandomNumber(world.ground, 300);
-    randomLenght = generateRandomNumber(100, 50);
-    platforms.push(new Platform(startingX + 500 * i, randomHeight, randomLenght, 10));
-  }
+function generatePlatforms(posX, posY) {
+  // for (var i = 0; i < numOfPlatf; i++) {
+  //   randomHeight = generateRandomNumber(world.ground, 300);
+  //   randomLenght = generateRandomNumber(100, 50);
+    platforms.push(new Platform(posX, posY, 50, 10));
+  // }
 }
-
-//when enemies are created i need to check
-//if a platform is needed
-
-//if enemy.bottom() is lower

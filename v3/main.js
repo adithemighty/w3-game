@@ -96,6 +96,8 @@ document.onkeydown = function(e) {
   } else if (e.keyCode === 37) {
     //LEFT
     playerHorizontalMovementFactor = -1;
+  } else if(e.keyCode === 32){
+    mario.spawnPlatform()
   }
 };
 
@@ -128,7 +130,7 @@ window.onload = function() {
 
   function startGame() {
     generateEnemies(10);
-    generatePlatforms(10);
+    // generatePlatforms(10);
     gameStart = Date.now();
     mario = new Hero(50, 70, ctx);
     mario.ownAnimation();
