@@ -3,8 +3,8 @@ var ctx;
 var backgrImg1;
 var backgrImg2;
 var platform,
-  platforms = [],
-  maxNoOfPlatforms = 3;
+  platforms = [];
+
 var mario;
 var enemies = [],
   collectedCats = [];
@@ -12,21 +12,9 @@ var enemies = [],
 var intervalCanvas;
 var intervalScore;
 
-var gameStart,
-  timePassed = 0,
-  initTime = 10,
-  totalTime = 100;
-
 var playerHorizontalMovementFactor = 0;
 
-var score;
 var collisionDetected = false;
-
-function getNumberOfCollectedCats() {
-  return enemies.filter(function(el) {
-    return el.collected === true;
-  }).length;
-}
 
 //GAMES MAIN LOOP
 function updateCanvas() {
@@ -46,9 +34,9 @@ function updateCanvas() {
     enemy.newPos();
     enemy.drawEnemy();
   });
-  // updateScore();
   showScore();
   showTime();
+  showNoOfPlatforms();
 
   timePassed = Date.now() - gameStart;
   if (Math.floor(timePassed / 1000) >= totalTime) {
@@ -58,32 +46,8 @@ function updateCanvas() {
   }
 }
 
-function updateScore() {
-  // totalTime = initTime + getNumberOfCollectedCats();
-  // console.log(totalTime);
-}
-
 function gameEnd() {
   console.log("game ended");
-}
-
-function showScore() {
-  score = getNumberOfCollectedCats();
-  ctx.save();
-  ctx.font = "30px monospace";
-  ctx.fillStyle = "white";
-  var text = `Your score: ${score}`;
-  ctx.fillText(text, canvas.width - 250, 50);
-  ctx.restore();
-}
-
-function showTime() {
-  // totalTime += (getNumberOfCollectedCats() * 3) / 1000;
-  var remainingTime = Math.floor(totalTime - timePassed / 1000);
-  ctx.font = "30px monospace";
-  ctx.fillStyle = "white";
-  var text = `Remaining time: ${remainingTime}`;
-  ctx.fillText(text, 20, 50);
 }
 
 document.onkeydown = function(e) {
@@ -121,21 +85,18 @@ window.onload = function() {
     backgrImg1.width,
     backgrImg1.height
   );
-  // platform = new Platform(250, 250, 40, 10);
   startGame();
 
   document.getElementById("start-button").onclick = function() {
-    // startGame();
     document.getElementById("start-button").disabled = "disabled";
   };
 
   function startGame() {
     generateEnemies(10);
-    // generatePlatforms(10);
     gameStart = Date.now();
     mario = new Hero(50, 70, ctx);
     mario.ownAnimation();
     intervalCanvas = setInterval(updateCanvas, 1);
-    intervalScore = setInterval(updateScore, 1000);
+    intervalScore = setInterval(calculateStats, 1000);
   }
 };
