@@ -103,7 +103,7 @@ var Hero = function(x, y, ctx) {
 
   this.detectEnemy = function(enemy) {
     if (this.right() >= enemy.left() && this.left() <= enemy.right()) {
-      if (mario.bottom() >= enemy.top() && mario.bottom() <= enemy.bottom()) {
+      if (mario.bottom() >= enemy.top() && mario.top() <= enemy.bottom()) {
         this.collectEnemy(enemy);
       } else if (
         mario.top() <= enemy.bottom() &&
