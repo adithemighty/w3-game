@@ -20,6 +20,6 @@ function generatePlatforms(numOfPlatf) {
   for (var i = 0; i < numOfPlatf; i++) {
     randomHeight = generateRandomNumber(world.ground, 300);
     randomLenght = generateRandomNumber(100, 50);
-    platforms.push(new Platform(startingX + 300 * i, randomHeight, randomLenght, 10));
+    platforms.push(new Platform(startingX + 500 * i, randomHeight, randomLenght, 10));
   }
 }

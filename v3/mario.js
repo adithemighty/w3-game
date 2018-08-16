@@ -9,6 +9,7 @@ var Hero = function(x, y, ctx) {
   this.speedY = 0;
   this.ctx = ctx;
   this.src = "./v3/nan.png";
+  this.isJumping = false;
 
   this.runningAnimation = {
     curRow: 1,
@@ -16,8 +17,12 @@ var Hero = function(x, y, ctx) {
   };
 
   this.idlingAnimation = {
-    curColumn: 0,
     curRow: 0,
+    frameCount: 4
+  };
+
+  this.jumpingAnimation = {
+    curRow: 6,
     frameCount: 4
   };
 
@@ -71,11 +76,16 @@ var Hero = function(x, y, ctx) {
         }
       }.bind(this)
     );
+
     // Ground detection
     if (newPosY >= world.ground) {
       newPosY = world.ground;
+      mario.isJumping = false;
     }
     this.posY = newPosY;
+    enemies.forEach(function(enemy) {
+      this.detectCollision(enemy);
+    }.bind(this));
   };
 
   this.detectPlatform = function(platform) {
@@ -90,7 +100,7 @@ var Hero = function(x, y, ctx) {
 
   //DETECTS IF HERO COLLIDED WITH ENEMY
   this.detectCollision = function(enemy) {
-    if (enemy && this.right() >= enemy.left()) {
+    if ( this.right() >= enemy.left() && this.left() <= enemy.right()) {
       if (mario.bottom() >= enemy.top() && mario.bottom() <= enemy.bottom()) {
         this.collectEnemy(enemy);
       } else if (
@@ -103,13 +113,16 @@ var Hero = function(x, y, ctx) {
   };
 
   //SET STATUS OF ENEMY TO COLLECTED SO THAT THEY ARE NOT DRAWN ON THE CANVAS ANYMORE
-  this.collectEnemy = function(enemy, ind) {
+  this.collectEnemy = function(enemy) {
     enemy.collected = true;
   };
 
   //DRAW HERO TO CANVAS
   this.drawHero = function() {
-    if (playerHorizontalMovementFactor !== 0) {
+    if (playerHorizontalMovementFactor === 0 && this.isJumping) {
+      this.curRow = this.jumpingAnimation.curRow;
+      this.frameCount = this.jumpingAnimation.frameCount;
+    } else if (playerHorizontalMovementFactor !== 0) {
       this.curRow = this.runningAnimation.curRow;
       this.frameCount = this.runningAnimation.frameCount;
     } else if (playerHorizontalMovementFactor === 0) {

@@ -32,7 +32,7 @@ function updateCanvas() {
   backgrImg1.newPos();
   backgrImg2.newPos();
   backgrImg1.drawBackground(backgrImg1, backgrImg2);
-  
+
   mario.drawHero();
   mario.newPos(platforms);
 
@@ -41,7 +41,7 @@ function updateCanvas() {
     platform.drawPlatform();
   });
   enemies.forEach(function(enemy) {
-    mario.detectCollision(enemy);
+    // mario.detectCollision(enemy);
     enemy.newPos();
     enemy.drawEnemy();
   });
@@ -92,6 +92,7 @@ document.onkeydown = function(e) {
   } else if (e.keyCode === 38) {
     //UP
     mario.jump();
+    mario.isJumping = true;
   } else if (e.keyCode === 37) {
     //LEFT
     playerHorizontalMovementFactor = -1;
@@ -102,7 +103,8 @@ document.onkeydown = function(e) {
 document.onkeyup = function(e) {
   if (e.keyCode === 39 || e.keyCode === 37) {
     playerHorizontalMovementFactor = 0;
-  } else {
+  } else if(e.keyCode === 38){
+    mario.isJumping = false
   }
 };
 
