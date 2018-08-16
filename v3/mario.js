@@ -105,7 +105,7 @@ var Hero = function(x, y, ctx) {
         this.collectEnemy(enemy);
       } else if (
         mario.top() <= enemy.bottom() &&
-        mario.bottom() >= enemy.bottom()
+        mario.bottom() >= enemy.top()
       ) {
         this.collectEnemy(enemy);
       }
