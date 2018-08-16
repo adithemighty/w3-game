@@ -7,7 +7,7 @@ var gameStart,
   totalTime = 100;
 var score = 0;
 var initNoOfPlatforms = 3,
-  maxNoOfPlatforms = initNoOfPlatforms;
+  platformsLeft = initNoOfPlatforms;
 
 function getNumberOfCollectedCats() {
   return enemies.filter(function(el) {
@@ -16,8 +16,8 @@ function getNumberOfCollectedCats() {
 }
 
 function calculateStats() {
-  maxNoOfPlatforms =
-    initNoOfPlatforms + Math.floor(getNumberOfCollectedCats() / 2);
+    platformsLeft =
+    initNoOfPlatforms + Math.floor(getNumberOfCollectedCats() / 2) - platforms.length;
 }
 
 function showScore() {
@@ -41,7 +41,7 @@ function showTime() {
 function showNoOfPlatforms() {
   displayText({
     text: "Platforms left: ",
-    value: maxNoOfPlatforms,
+    value: platformsLeft,
     x: canvas.width / 2 - 100
   });
 }

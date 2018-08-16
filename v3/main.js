@@ -30,7 +30,6 @@ function updateCanvas() {
     platform.drawPlatform();
   });
   enemies.forEach(function(enemy) {
-    // mario.detectCollision(enemy);
     enemy.newPos();
     enemy.drawEnemy();
   });
