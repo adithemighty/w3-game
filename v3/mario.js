@@ -8,7 +8,7 @@ var Hero = function(x, y, ctx) {
   Component.call(this, x, y, 100, 150);
   this.speedY = 0;
   this.ctx = ctx;
-  this.src = "./v3/nan.png";
+  this.src = "./v3/pictures/nan.png";
   this.isJumping = false;
 
   this.runningAnimation = {
@@ -83,9 +83,11 @@ var Hero = function(x, y, ctx) {
       mario.isJumping = false;
     }
     this.posY = newPosY;
-    enemies.forEach(function(enemy) {
-      this.detectCollision(enemy);
-    }.bind(this));
+    enemies.forEach(
+      function(enemy) {
+        this.detectCollision(enemy);
+      }.bind(this)
+    );
   };
 
   this.detectPlatform = function(platform) {
@@ -100,7 +102,7 @@ var Hero = function(x, y, ctx) {
 
   //DETECTS IF HERO COLLIDED WITH ENEMY
   this.detectCollision = function(enemy) {
-    if ( this.right() >= enemy.left() && this.left() <= enemy.right()) {
+    if (this.right() >= enemy.left() && this.left() <= enemy.right()) {
       if (mario.bottom() >= enemy.top() && mario.bottom() <= enemy.bottom()) {
         this.collectEnemy(enemy);
       } else if (

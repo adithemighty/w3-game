@@ -17,6 +17,14 @@ var Enemy = function(x, y, width, height, src) {
       ctx.restore();
     }
   };
+
+  this.makeSound = function() {
+    var audio = new Audio("./v3/sounds/meow.wav");
+    audio.play();
+    audio.volume = 0.01;
+    // audio.loop = false;
+    console.log('sound')
+  };
 };
 
 var randomNumber;
@@ -25,8 +33,8 @@ var sources = [
   "https://tinyurl.com/y8ymv6cr",
   "https://tinyurl.com/yd2d4poq",
   "https://tinyurl.com/y74gs578",
-  "./v3/cat.png",
-  "./v3/cat_of_lisa.png"
+  "./v3/pictures/cat.png",
+  "./v3/pictures/cat_of_lisa.png"
 ];
 
 function generateEnemies(enemNumb) {
