@@ -1,7 +1,5 @@
 var canvas;
 var ctx;
-var backgrImg1;
-var backgrImg2;
 var platform,
   platforms = [];
 
@@ -19,10 +17,10 @@ var collisionDetected = false;
 var gameStarted = false;
 
 //GAMES MAIN LOOP
-function updateCanvas() {
-  backgrImg1.newPos();
-  backgrImg2.newPos();
-  backgrImg1.drawBackground(backgrImg1, backgrImg2);
+function updateCanvas(game) {
+  game.backgrImg1.newPos();
+  game.backgrImg2.newPos();
+  game.backgrImg1.drawBackground(game.backgrImg1, game.backgrImg2);
 
   granny.newPos(platforms);
   platforms.forEach(function(platform) {
@@ -59,12 +57,20 @@ function gameEnd() {
   var middle = canvas.width / 2 - 150;
   var strings = {
     0: { text: "GAME OVER", value: "", x: middle },
-    1: { text: "Pets saved: ", value: getNumberOfCollectedCats(), x: middle - 20},
+    1: {
+      text: "Pets saved: ",
+      value: getNumberOfCollectedCats(),
+      x: middle - 20
+    },
     2: { text: "of ", value: enemies.length, x: middle + 15 },
     3: { text: victoryText, value: "", x: 20 },
-    4: { text: "Refresh to start new game", value: "", x: middle -50 },
-    5: { text: "SPECIAL THANKS TO ALL,", value: "", x: middle - 40},
-    6: { text: "who provided pictures of their pets! ", value: "", x: middle - 120}
+    4: { text: "Refresh to start new game", value: "", x: middle - 50 },
+    5: { text: "SPECIAL THANKS TO ALL,", value: "", x: middle - 40 },
+    6: {
+      text: "who provided pictures of their pets! ",
+      value: "",
+      x: middle - 120
+    }
   };
   var length = Object.keys(strings).length;
   for (var i = 0; i < length; i++) {
@@ -109,12 +115,15 @@ document.onkeyup = function(e) {
 window.onload = function() {
   canvas = document.getElementById("canvas");
   ctx = canvas.getContext("2d");
-  backgrImg1 = new Background(10, 0, canvas.width, canvas.height - 50);
-  backgrImg2 = new Background(
-    backgrImg1.x - backgrImg1.width,
+  var game = {
+    backgrImg1: new Background(10, 0, canvas.width, canvas.height - 50),
+    backgrImg2: null
+  };
+  game.backgrImg2 = new Background(
+    game.backgrImg1.x - game.backgrImg1.width,
     0,
-    backgrImg1.width,
-    backgrImg1.height
+    game.backgrImg1.width,
+    game.backgrImg1.height
   );
   intro = new Intro();
   intervalIntro = setInterval(checkIntro);
@@ -122,17 +131,19 @@ window.onload = function() {
   function checkIntro() {
     if (intro.checkIfDone()) {
       gameStarted = true;
-      startGame();
+      startGame(game);
       clearInterval(intervalIntro);
     }
   }
 
-  function startGame() {
+  function startGame(game) {
     generateEnemies(10);
     gameStart = Date.now();
     granny = new Hero(50, 70, ctx);
     granny.ownAnimation();
-    intervalCanvas = setInterval(updateCanvas, 1);
+    intervalCanvas = setInterval(function() {
+      return updateCanvas(game);
+    }, 1);
     intervalScore = setInterval(calculatePlatforms, 1000);
   }
 };
