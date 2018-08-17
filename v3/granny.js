@@ -84,9 +84,9 @@ var Hero = function(x, y, ctx) {
       this.isJumping = false;
     }
     this.posY = newPosY;
-    enemies.forEach(
-      function(enemy) {
-        this.detectEnemy(enemy);
+    pets.forEach(
+      function(pet) {
+        this.detectPet(pet);
       }.bind(this)
     );
   };
@@ -101,15 +101,15 @@ var Hero = function(x, y, ctx) {
     }
   };
 
-  this.detectEnemy = function(enemy) {
-    if (this.right() >= enemy.left() && this.left() <= enemy.right()) {
-      if (granny.bottom() >= enemy.top() && granny.top() <= enemy.bottom()) {
-        this.collectEnemy(enemy);
+  this.detectPet = function(pet) {
+    if (this.right() >= pet.left() && this.left() <= pet.right()) {
+      if (granny.bottom() >= pet.top() && granny.top() <= pet.bottom()) {
+        this.collectPet(pet);
       } else if (
-        granny.top() <= enemy.bottom() &&
-        granny.bottom() >= enemy.top()
+        granny.top() <= pet.bottom() &&
+        granny.bottom() >= pet.top()
       ) {
-        this.collectEnemy(enemy);
+        this.collectPet(pet);
       }
     }
   };
@@ -126,8 +126,8 @@ var Hero = function(x, y, ctx) {
   };
 
   //SET STATUS OF ENEMY TO COLLECTED SO THAT THEY ARE NOT DRAWN ON THE CANVAS ANYMORE
-  this.collectEnemy = function(enemy) {
-    enemy.collected = true;
+  this.collectPet = function(pet) {
+    pet.collected = true;
   };
 
   //DRAW HERO TO CANVAS

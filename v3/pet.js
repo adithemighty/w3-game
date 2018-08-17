@@ -1,4 +1,4 @@
-var Enemy = function(x, y, width, height, src) {
+var Pet = function(x, y, width, height, src) {
   Component.call(this, x, y, width, height);
   this.collected = false;
   this.img = new Image();
@@ -10,7 +10,7 @@ var Enemy = function(x, y, width, height, src) {
   };
 
   //IF ENEMY IS COLLECTED IT'S NOT DRAWN
-  this.drawEnemy = function() {
+  this.drawPet = function() {
     if (this.collected === false) {
       ctx.save();
       ctx.drawImage(this.img, this.posX, this.posY, 70, 70);
@@ -45,9 +45,9 @@ function generateEnemies(enemNumb) {
     randomNumber = generateRandomNumber(sources.length);
     var img = sources[randomNumber];
     randomNumber = generateRandomNumber(world.ground, 0);
-    enemies.push(new Enemy(startingX + 300 * i, randomNumber, 25, 25, img));
+    pets.push(new Pet(startingX + 300 * i, randomNumber, 25, 25, img));
   }
 }
 
-Enemy.prototype = Object.create(Component.prototype);
-Enemy.prototype.constructor = Enemy;
+Pet.prototype = Object.create(Component.prototype);
+Pet.prototype.constructor = Pet;

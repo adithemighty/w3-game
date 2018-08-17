@@ -17,7 +17,7 @@ var cc = c.getContext("2d");
 //   };
 // };
 
-var Enemy = function(x, y) {
+var Pet = function(x, y) {
   this.posX = x;
   this.posY = y;
 };

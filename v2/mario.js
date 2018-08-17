@@ -16,16 +16,16 @@ var Hero = function(x, y) {
       this.posY -= 50;
     }
   };
-  this.newPos = function(enemy) {
+  this.newPos = function(pet) {
     if (this.posY >= world.ground) {
       this.posY = world.ground;
     } else {
       this.posY *= world.gravity;
     }
 
-    if (enemy && this.posX + granny.width >= enemy.posX) {
-      enemy.collected = true;
-      enemies.splice(0, 1);
+    if (pet && this.posX + granny.width >= pet.posX) {
+      pet.collected = true;
+      pets.splice(0, 1);
       score++;
     }
   };

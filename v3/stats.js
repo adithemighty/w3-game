@@ -10,7 +10,7 @@ var initNoOfPlatforms = 3,
   platformsLeft = initNoOfPlatforms;
 
 function getNumberOfCollectedCats() {
-  return enemies.filter(function(el) {
+  return pets.filter(function(el) {
     return el.collected === true;
   }).length;
 }

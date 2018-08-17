@@ -1,18 +1,14 @@
-var canvas;
-var ctx;
 var platform,
   platforms = [];
 
 var granny;
-var enemies = [],
+var pets = [],
   collectedCats = [];
 
 var intervalCanvas;
 var intervalScore;
 
 var playerHorizontalMovementFactor = 0;
-
-var collisionDetected = false;
 
 var gameStarted = false;
 
@@ -27,9 +23,9 @@ function updateCanvas(game) {
     platform.newPos();
     platform.drawPlatform();
   });
-  enemies.forEach(function(enemy) {
-    enemy.newPos();
-    enemy.drawEnemy();
+  pets.forEach(function(pet) {
+    pet.newPos();
+    pet.drawPet();
   });
   granny.drawHero();
   showScore();
@@ -39,7 +35,7 @@ function updateCanvas(game) {
   timePassed = Date.now() - gameStart;
   if (
     Math.floor(timePassed / 1000) >= totalTime ||
-    getNumberOfCollectedCats() === enemies.length
+    getNumberOfCollectedCats() === pets.length
   ) {
     clearInterval(intervalCanvas);
     clearInterval(intervalScore);
@@ -50,7 +46,7 @@ function updateCanvas(game) {
 function gameEnd() {
   var victoryText =
     "You did well, but some of these pets will die in this forest now";
-  if (getNumberOfCollectedCats() === enemies.length) {
+  if (getNumberOfCollectedCats() === pets.length) {
     victoryText = `You collected all pets and they don't have to die in the forest`;
   }
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -62,7 +58,7 @@ function gameEnd() {
       value: getNumberOfCollectedCats(),
       x: middle - 20
     },
-    2: { text: "of ", value: enemies.length, x: middle + 15 },
+    2: { text: "of ", value: pets.length, x: middle + 15 },
     3: { text: victoryText, value: "", x: 20 },
     4: { text: "Refresh to start new game", value: "", x: middle - 50 },
     5: { text: "SPECIAL THANKS TO ALL,", value: "", x: middle - 40 },

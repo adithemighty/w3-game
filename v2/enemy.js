@@ -1,4 +1,4 @@
-var Enemy = function(x, y, width, height) {
+var Pet = function(x, y, width, height) {
   this.speed = 1;
   this.posX = x;
   this.posY = y;
@@ -8,7 +8,7 @@ var Enemy = function(x, y, width, height) {
   this.newPos = function() {
     this.posX -= this.speed;
   };
-  this.drawEnemy = function() {
+  this.drawPet = function() {
     if (this.collected === false) {
       ctx.save();
       ctx.fillStyle = "red";
@@ -23,7 +23,7 @@ function generateEnemies(enemNumb) {
   var startingX = canvas.width - 150;
   for (var i = 0; i < enemNumb; i++) {
     randomNumber = generateRandomNumber(canvas.height);
-    enemies.push(new Enemy(startingX + 300 * i, randomNumber, 100, 100));
+    pets.push(new Pet(startingX + 300 * i, randomNumber, 100, 100));
   }
   intervalId = setInterval(updateCanvas, 1);
 }

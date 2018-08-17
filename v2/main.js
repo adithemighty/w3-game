@@ -20,7 +20,7 @@ var backgrImg2 = new Background(
   backgrImg1.width,
   backgrImg1.height
 );
-var enemies = [];
+var pets = [];
 var intervalId;
 var gameStart,
   timePassed = 0;
@@ -34,10 +34,10 @@ function updateCanvas() {
   backgrImg1.newPos();
   backgrImg2.newPos();
   granny.drawHero();
-  granny.newPos(enemies[0]);
-  enemies.forEach(function(enemy) {
-    enemy.newPos();
-    enemy.drawEnemy();
+  granny.newPos(pets[0]);
+  pets.forEach(function(pet) {
+    pet.newPos();
+    pet.drawPet();
   });
   showScore();
 
@@ -52,15 +52,15 @@ function updateCanvas() {
 document.onkeydown = function(e) {
   if (e.keyCode === 39) {
     //RIGHT
-    enemies.forEach(function(enemy) {
-      granny.newPos(enemy);
+    pets.forEach(function(pet) {
+      granny.newPos(pet);
     });
     playerHorizontalMovementFactor = 1;
   } else if (e.keyCode === 38) {
     //UP
     granny.jump();
-    enemies.forEach(function(enemy) {
-      granny.newPos(enemy);
+    pets.forEach(function(pet) {
+      granny.newPos(pet);
     });
   } else if (e.keyCode === 37) {
     //LEFT
