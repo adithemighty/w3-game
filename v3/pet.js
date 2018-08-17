@@ -44,7 +44,7 @@ function generateEnemies(enemNumb) {
   for (var i = 0; i < enemNumb; i++) {
     randomNumber = generateRandomNumber(sources.length);
     var img = sources[randomNumber];
-    randomNumber = generateRandomNumber(world.ground, 0);
+    randomNumber = generateRandomNumber(world.ground - 100, 0);
     pets.push(new Pet(startingX + 300 * i, randomNumber, 25, 25, img));
   }
 }
