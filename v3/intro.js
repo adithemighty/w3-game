@@ -39,15 +39,28 @@ function Intro() {
     }.bind(this)
   };
   this.text = {
-    dialogOneOne: "I am granny Nice.",
-    dialogOneTwo: "I like to help pets that got lost in the woods.",
-    dialogOneThree: "Press any key to continue.",
-    dialogTwoOne: "Press left to move left.",
-    dialogTwoTwo: "Press right to move right.",
-    dialogTwoThree: "Press up to jump.",
-    dialogTwoFour: "Press space to create cat tree.",
-    dialogThreeOne: "Ready?",
-    dialogThreeTwo: "Press any key to continue",
+    dialogOne: {
+      0: "I am granny Nice.",
+      1: "I like to help pets that got lost in the woods.",
+      2: "Press any key to continue."
+    },
+    dialogTwo: {
+      0: "Press left to move left.",
+      1: "Press right to move right.",
+      2: "Press up to jump.",
+      3: "Jump AND press space to get",
+      4: "to pets that are too high."
+    },
+    dialogThree: {
+      0: "You have a limited amount of time",
+      1: "and platforms so use them wisely.",
+      2: "With every second pet you catch",
+      3: "you will get an additional platform."
+    },
+    dialogFour: {
+      0: "Ready?",
+      1: "Press any key to continue"
+    },
     drawText: function(text, y) {
       displayText({
         text: text,
@@ -57,24 +70,33 @@ function Intro() {
       });
     }.bind(this),
     drawFirstDialogue: function() {
-      this.text.drawText(this.text.dialogOneOne, 100);
-      this.text.drawText(this.text.dialogOneTwo, 150);
-      this.text.drawText(this.text.dialogOneThree, 200);
+      var length = Object.keys(this.text.dialogOne).length;
+      for (var i = 0; i < length; i++) {
+        this.text.drawText(this.text.dialogOne[i], 100 + 50 * i);
+      }
     }.bind(this),
     drawSecondDialogue: function() {
-      this.text.drawText(this.text.dialogTwoOne, 100);
-      this.text.drawText(this.text.dialogTwoTwo, 150);
-      this.text.drawText(this.text.dialogTwoThree, 200);
-      this.text.drawText(this.text.dialogTwoFour, 250);
+      var length = Object.keys(this.text.dialogTwo).length;
+      for (var i = 0; i < length; i++) {
+        this.text.drawText(this.text.dialogTwo[i], 100 + 50 * i);
+      }
     }.bind(this),
     drawThirdDialogue: function() {
-      this.text.drawText(this.text.dialogThreeOne, 100);
-      this.text.drawText(this.text.dialogThreeTwo, 150);
+      var length = Object.keys(this.text.dialogThree).length;
+      for (var i = 0; i < length; i++) {
+        this.text.drawText(this.text.dialogThree[i], 100 + 50 * i);
+      }
+    }.bind(this),
+    drawFourthDialogue: function() {
+      var length = Object.keys(this.text.dialogFour).length;
+      for (var i = 0; i < length; i++) {
+        this.text.drawText(this.text.dialogFour[i], 100 + 50 * i);
+      }
     }.bind(this)
   };
 
   this.checkIfDone = function() {
-    if (this.counter >= 4) {
+    if (this.counter >= 5) {
       return true;
     } else {
       this.mainLoop();
@@ -93,6 +115,9 @@ function Intro() {
     } else if (this.counter === 3) {
       drawRect();
       this.text.drawThirdDialogue();
+    } else if (this.counter === 4) {
+      drawRect();
+      this.text.drawFourthDialogue();
     }
     this.grandma.drawGrandma();
   };

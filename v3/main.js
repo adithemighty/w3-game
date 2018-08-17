@@ -5,7 +5,7 @@ var backgrImg2;
 var platform,
   platforms = [];
 
-var mario;
+var granny;
 var enemies = [],
   collectedCats = [];
 
@@ -24,7 +24,7 @@ function updateCanvas() {
   backgrImg2.newPos();
   backgrImg1.drawBackground(backgrImg1, backgrImg2);
 
-  mario.newPos(platforms);
+  granny.newPos(platforms);
   platforms.forEach(function(platform) {
     platform.newPos();
     platform.drawPlatform();
@@ -33,13 +33,16 @@ function updateCanvas() {
     enemy.newPos();
     enemy.drawEnemy();
   });
-  mario.drawHero();
+  granny.drawHero();
   showScore();
   showTime();
   showNoOfPlatforms();
 
   timePassed = Date.now() - gameStart;
-  if (Math.floor(timePassed / 1000) >= totalTime || getNumberOfCollectedCats() === enemies.length) {
+  if (
+    Math.floor(timePassed / 1000) >= totalTime ||
+    getNumberOfCollectedCats() === enemies.length
+  ) {
     clearInterval(intervalCanvas);
     clearInterval(intervalScore);
     gameEnd();
@@ -49,40 +52,29 @@ function updateCanvas() {
 function gameEnd() {
   var victoryText =
     "You did well, but some of these pets will die in this forest now";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  displayText({
-    text: "GAME OVER",
-    value: "",
-    x: canvas.width / 2 - 100,
-    y: 50
-  });
-  displayText({
-    text: "Cats collected: ",
-    value: getNumberOfCollectedCats(),
-    x: canvas.width / 2 - 150,
-    y: 100
-  });
-  displayText({
-    text: "of ",
-    value: enemies.length,
-    x: canvas.width / 2 + 150,
-    y: 100
-  });
   if (getNumberOfCollectedCats() === enemies.length) {
     victoryText = `You collected all pets and they don't have to die in the forest`;
   }
-  displayText({
-    text: victoryText,
-    value: "",
-    x: 20,
-    y: 200
-  });
-  displayText({
-    text: 'Refresh to start new game',
-    value: "",
-    x: canvas.width / 2-150,
-    y: 250
-  });
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  var middle = canvas.width / 2 - 150;
+  var strings = {
+    0: { text: "GAME OVER", value: "", x: middle },
+    1: { text: "Pets saved: ", value: getNumberOfCollectedCats(), x: middle - 20},
+    2: { text: "of ", value: enemies.length, x: middle + 15 },
+    3: { text: victoryText, value: "", x: 20 },
+    4: { text: "Refresh to start new game", value: "", x: middle -50 },
+    5: { text: "SPECIAL THANKS TO ALL,", value: "", x: middle - 40},
+    6: { text: "who provided pictures of their pets! ", value: "", x: middle - 120}
+  };
+  var length = Object.keys(strings).length;
+  for (var i = 0; i < length; i++) {
+    displayText({
+      text: strings[i].text,
+      value: strings[i].value,
+      x: strings[i].x,
+      y: 50 + 50 * i
+    });
+  }
 }
 
 document.onkeydown = function(e) {
@@ -92,13 +84,13 @@ document.onkeydown = function(e) {
       playerHorizontalMovementFactor = 1;
     } else if (e.keyCode === 38) {
       //UP
-      mario.jump();
-      mario.isJumping = true;
+      granny.jump();
+      granny.isJumping = true;
     } else if (e.keyCode === 37) {
       //LEFT
       playerHorizontalMovementFactor = -1;
     } else if (e.keyCode === 32) {
-      mario.spawnPlatform();
+      granny.spawnPlatform();
     }
   } else {
     intro.counter++;
@@ -110,7 +102,7 @@ document.onkeyup = function(e) {
   if (e.keyCode === 39 || e.keyCode === 37) {
     playerHorizontalMovementFactor = 0;
   } else if (e.keyCode === 38) {
-    mario.isJumping = false;
+    granny.isJumping = false;
   }
 };
 
@@ -138,8 +130,8 @@ window.onload = function() {
   function startGame() {
     generateEnemies(10);
     gameStart = Date.now();
-    mario = new Hero(50, 70, ctx);
-    mario.ownAnimation();
+    granny = new Hero(50, 70, ctx);
+    granny.ownAnimation();
     intervalCanvas = setInterval(updateCanvas, 1);
     intervalScore = setInterval(calculatePlatforms, 1000);
   }

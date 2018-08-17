@@ -11,7 +11,7 @@ function displayText() {
   var y;
   var color;
   color = "white";
-  if (typeof arguments[0].y === "undefined") {
+  if (typeof arguments[0].y == "undefined") {
     y = 50;
   } else {
     y = arguments[0].y;

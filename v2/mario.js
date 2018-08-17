@@ -23,7 +23,7 @@ var Hero = function(x, y) {
       this.posY *= world.gravity;
     }
 
-    if (enemy && this.posX + mario.width >= enemy.posX) {
+    if (enemy && this.posX + granny.width >= enemy.posX) {
       enemy.collected = true;
       enemies.splice(0, 1);
       score++;
@@ -31,9 +31,9 @@ var Hero = function(x, y) {
   };
   this.drawHero = function() {
     var img = new Image();
-    img.src = mario.src;
+    img.src = granny.src;
     ctx.save();
-    ctx.drawImage(img, mario.posX, mario.posY, mario.width, mario.height);
+    ctx.drawImage(img, granny.posX, granny.posY, granny.width, granny.height);
     ctx.restore();
   };
 };

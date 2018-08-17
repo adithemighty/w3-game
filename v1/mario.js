@@ -16,8 +16,8 @@ var Hero = function(x, y) {
 
 function drawHero() {
     var img = new Image();
-    img.src = mario.src;
+    img.src = granny.src;
     cc.save();
-    cc.drawImage(img, mario.x, mario.y, 50, 70);
+    cc.drawImage(img, granny.x, granny.y, 50, 70);
     cc.restore();
   }

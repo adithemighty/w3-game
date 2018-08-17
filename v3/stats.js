@@ -4,7 +4,7 @@
 var gameStart,
   timePassed = 0,
   initTime = 10,
-  totalTime = 25;
+  totalTime = 30;
 var score = 0;
 var initNoOfPlatforms = 3,
   platformsLeft = initNoOfPlatforms;
@@ -21,9 +21,9 @@ function calculatePlatforms() {
     Math.floor(getNumberOfCollectedCats() / 2) -
     platforms.length;
   if (platformsLeft <= 0) {
-    mario.platformsLeft = false;
+    granny.platformsLeft = false;
   } else {
-    mario.platformsLeft = true;
+    granny.platformsLeft = true;
   }
 }
 

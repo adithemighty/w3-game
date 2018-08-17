@@ -81,7 +81,7 @@ var Hero = function(x, y, ctx) {
     // Ground detection
     if (newPosY >= world.ground) {
       newPosY = world.ground;
-      mario.isJumping = false;
+      granny.isJumping = false;
     }
     this.posY = newPosY;
     enemies.forEach(
@@ -103,11 +103,11 @@ var Hero = function(x, y, ctx) {
 
   this.detectEnemy = function(enemy) {
     if (this.right() >= enemy.left() && this.left() <= enemy.right()) {
-      if (mario.bottom() >= enemy.top() && mario.top() <= enemy.bottom()) {
+      if (granny.bottom() >= enemy.top() && granny.top() <= enemy.bottom()) {
         this.collectEnemy(enemy);
       } else if (
-        mario.top() <= enemy.bottom() &&
-        mario.bottom() >= enemy.top()
+        granny.top() <= enemy.bottom() &&
+        granny.bottom() >= enemy.top()
       ) {
         this.collectEnemy(enemy);
       }

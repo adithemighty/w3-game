@@ -29,7 +29,7 @@ var World = function() {
 
 var bR1 = new Background(10, 0, c.width, c.height - 50);
 var bR2 = new Background(bR1.x - bR1.width, 0, bR1.width, bR1.height);
-var mario = new Hero(100, 100);
+var granny = new Hero(100, 100);
 var world = new World();
 var intervalId;
 var counter = 0;
@@ -40,7 +40,7 @@ intervalId = setInterval(updateCanvas, 10);
 function updateCanvas() {
   bR1.newPos();
   bR2.newPos();
-  mario.newPos();
+  granny.newPos();
   drawBackground();
   drawHero();
 }
@@ -48,13 +48,13 @@ function updateCanvas() {
 document.onkeydown = function(e) {
   if (e.keyCode === 39) {
     //RIGHT
-    mario.newPos();
+    granny.newPos();
     playerHorizontalMovementFactor = 1;
     // console.log('i moved right')
   } else if (e.keyCode === 38) {
     //UP
-    mario.jump();
-    mario.newPos();
+    granny.jump();
+    granny.newPos();
   } else if (e.keyCode === 37) {
     // console.log(e)
     playerHorizontalMovementFactor = -1;

@@ -10,7 +10,7 @@ window.onload = function() {
   }
 };
 
-var mario = new Hero(100, 200);
+var granny = new Hero(100, 200);
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 var backgrImg1 = new Background(10, 0, canvas.width, canvas.height - 50);
@@ -33,8 +33,8 @@ function updateCanvas() {
   backgrImg1.drawBackground(backgrImg1, backgrImg2);
   backgrImg1.newPos();
   backgrImg2.newPos();
-  mario.drawHero();
-  mario.newPos(enemies[0]);
+  granny.drawHero();
+  granny.newPos(enemies[0]);
   enemies.forEach(function(enemy) {
     enemy.newPos();
     enemy.drawEnemy();
@@ -53,14 +53,14 @@ document.onkeydown = function(e) {
   if (e.keyCode === 39) {
     //RIGHT
     enemies.forEach(function(enemy) {
-      mario.newPos(enemy);
+      granny.newPos(enemy);
     });
     playerHorizontalMovementFactor = 1;
   } else if (e.keyCode === 38) {
     //UP
-    mario.jump();
+    granny.jump();
     enemies.forEach(function(enemy) {
-      mario.newPos(enemy);
+      granny.newPos(enemy);
     });
   } else if (e.keyCode === 37) {
     //LEFT
