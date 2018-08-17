@@ -28,10 +28,10 @@ function calculatePlatforms() {
 }
 
 function showScore() {
-  score = getNumberOfCollectedCats();
+  petsLeft = pets.length - getNumberOfCollectedCats();
   displayText({
-    text: "Your score: ",
-    value: score,
+    text: "Pets left: ",
+    value: petsLeft,
     x: canvas.width - 250
   });
 }

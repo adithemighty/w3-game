@@ -18,7 +18,6 @@ var Background = function(x, y, width, height) {
   };
   this.drawBackground = function(bG1, bG2) {
     var img = new Image();
-    // img.onload = drawBackground;
     img.src = this.src;
     ctx.save();
     ctx.drawImage(img, bG1.x, bG1.y, canvas.width, canvas.height);
