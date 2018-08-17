@@ -69,28 +69,10 @@ function Intro() {
         y: y
       });
     }.bind(this),
-    drawFirstDialogue: function() {
-      var length = Object.keys(this.text.dialogOne).length;
+    drawDialogue: function(dialogNumb) {
+      var length = Object.keys(this.text[dialogNumb]).length;
       for (var i = 0; i < length; i++) {
-        this.text.drawText(this.text.dialogOne[i], 100 + 50 * i);
-      }
-    }.bind(this),
-    drawSecondDialogue: function() {
-      var length = Object.keys(this.text.dialogTwo).length;
-      for (var i = 0; i < length; i++) {
-        this.text.drawText(this.text.dialogTwo[i], 100 + 50 * i);
-      }
-    }.bind(this),
-    drawThirdDialogue: function() {
-      var length = Object.keys(this.text.dialogThree).length;
-      for (var i = 0; i < length; i++) {
-        this.text.drawText(this.text.dialogThree[i], 100 + 50 * i);
-      }
-    }.bind(this),
-    drawFourthDialogue: function() {
-      var length = Object.keys(this.text.dialogFour).length;
-      for (var i = 0; i < length; i++) {
-        this.text.drawText(this.text.dialogFour[i], 100 + 50 * i);
+        this.text.drawText(this.text[dialogNumb][i], 100 + 50 * i);
       }
     }.bind(this)
   };
@@ -108,16 +90,16 @@ function Intro() {
     this.livingRoom.drawLivingRoom();
     if (this.counter === 1) {
       drawRect();
-      this.text.drawFirstDialogue();
+      this.text.drawDialogue("dialogOne");
     } else if (this.counter === 2) {
       drawRect();
-      this.text.drawSecondDialogue();
+      this.text.drawDialogue("dialogTwo");
     } else if (this.counter === 3) {
       drawRect();
-      this.text.drawThirdDialogue();
+      this.text.drawDialogue("dialogThree");
     } else if (this.counter === 4) {
       drawRect();
-      this.text.drawFourthDialogue();
+      this.text.drawDialogue("dialogFour");
     }
     this.grandma.drawGrandma();
   };
