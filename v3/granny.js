@@ -81,7 +81,7 @@ var Hero = function(x, y, ctx) {
     // Ground detection
     if (newPosY >= world.ground) {
       newPosY = world.ground;
-      granny.isJumping = false;
+      this.isJumping = false;
     }
     this.posY = newPosY;
     enemies.forEach(
